@@ -38,6 +38,11 @@ interface LifeItem {
   images?: string[];
 }
 
+const resolveAsset = (path: string) =>
+  /^https?:\/\//.test(path)
+    ? path
+    : `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 // --- Data Dictionaries ---
 
 const t = {
@@ -357,21 +362,21 @@ const LIFE_DATA: Record<string, LifeCategory> = {
         title: { en: "Piano", zh: "钢琴" },
         type: "hobby",
         content: { en: "Playing piano brings me peace.", zh: "弹钢琴让我感到平静。" },
-        images: ["/piano.jpeg"]
+        images: [resolveAsset("/piano.jpeg")]
       },
       {
         id: 2,
         title: { en: "Guitar", zh: "吉他" },
         type: "hobby",
         content: { en: "Strumming some tunes on my guitar.", zh: "用吉他弹奏一些曲调。" },
-        images: ["/guitar.jpeg"]
+        images: [resolveAsset("/guitar.jpeg")]
       },
       {
         id: 3,
         title: { en: "Choir", zh: "合唱团" },
         type: "hobby",
         content: { en: "Singing with the choir.", zh: "在合唱团唱歌。" },
-        images: ["/choir1.jpeg", "/choir2.jpeg"]
+        images: [resolveAsset("/choir1.jpeg"), resolveAsset("/choir2.jpeg")]
       }
     ]
   },
@@ -383,7 +388,7 @@ const LIFE_DATA: Record<string, LifeCategory> = {
         title: { en: "Tennis", zh: "网球" },
         type: "hobby",
         content: { en: "Tennis since 8.", zh: "8岁开始打网球。" },
-        images: ["/tennis1.png", "/tennis2.png"]
+        images: [resolveAsset("/tennis1.png"), resolveAsset("/tennis2.png")]
       }
     ]
   },
@@ -396,8 +401,8 @@ const LIFE_DATA: Record<string, LifeCategory> = {
         type: "hobby",
         content: { en: "Volunteer teaching and crisis center responding.", zh: "志愿支教和危机中心响应工作。" },
         images: [
-          "/education1.jpeg", 
-          "/education2.png", 
+          resolveAsset("/education1.jpeg"), 
+          resolveAsset("/education2.png"), 
           "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2500&auto=format&fit=crop", 
           "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2500&auto=format&fit=crop"
         ]
@@ -484,7 +489,7 @@ const Hero = ({ setSection, lang }: { setSection: (s: Section) => void, lang: La
           className="relative aspect-square md:aspect-[4/5] bg-stone-100 rounded-3xl overflow-hidden group shadow-2xl"
         >
           <img 
-            src="/profile.png" 
+            src={resolveAsset("/profile.png")} 
             alt="Runchu Wu"
             onError={(e) => {
               e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop";
@@ -694,28 +699,28 @@ type CollageItem =
 
 const COLLAGE_ITEMS: CollageItem[] = [
   // Row 1: Image, Text, Image
-  { id: 'img1', type: 'image', src: '/piano.jpeg', alt: 'Piano', caption: { en: '@ Piano', zh: '@ 钢琴' } },
+  { id: 'img1', type: 'image', src: resolveAsset('/piano.jpeg'), alt: 'Piano', caption: { en: '@ Piano', zh: '@ 钢琴' } },
   { id: 'txt1', type: 'text', emojis: '# 🎹 # 🎵 # ✨', content: { en: '<- Playing piano brings me peace. I also love strumming some tunes on my guitar. ->', zh: '<- 弹钢琴让我感到平静。我也喜欢用吉他弹奏一些曲调。->' } },
-  { id: 'img2', type: 'image', src: '/guitar.jpeg', alt: 'Guitar', caption: { en: '@ Guitar', zh: '@ 吉他' } },
+  { id: 'img2', type: 'image', src: resolveAsset('/guitar.jpeg'), alt: 'Guitar', caption: { en: '@ Guitar', zh: '@ 吉他' } },
   
   // Row 2: Image, Image, Text
-  { id: 'img3', type: 'image', src: '/choir1.jpeg', alt: 'Choir', caption: { en: '@ Choir', zh: '@ 合唱团' } },
-  { id: 'img4', type: 'image', src: '/choir2.jpeg', alt: 'Choir', caption: { en: '@ Choir', zh: '@ 合唱团' } },
+  { id: 'img3', type: 'image', src: resolveAsset('/choir1.jpeg'), alt: 'Choir', caption: { en: '@ Choir', zh: '@ 合唱团' } },
+  { id: 'img4', type: 'image', src: resolveAsset('/choir2.jpeg'), alt: 'Choir', caption: { en: '@ Choir', zh: '@ 合唱团' } },
   { id: 'txt_choir', type: 'text', emojis: '# 🎤 # 🎶 # 👯‍♀️', content: { en: '<- Singing with the choir is always a blast.', zh: '<- 和合唱团一起唱歌总是很开心。' } },
 
   // Row 3: Text, Image, Image
   { id: 'txt2', type: 'text', emojis: '# 🎾 # 🏃‍♀️ # 💦', content: { en: 'Tennis since 8. Love the sweat and energy on the court. ->', zh: '8岁开始打网球。热爱球场上的汗水与活力。->' } },
-  { id: 'img5', type: 'image', src: '/tennis1.png', alt: 'Tennis', caption: { en: '@ Tennis', zh: '@ 网球' } },
-  { id: 'img6', type: 'image', src: '/tennis2.png', alt: 'Tennis', caption: { en: '@ Tennis', zh: '@ 网球' } },
+  { id: 'img5', type: 'image', src: resolveAsset('/tennis1.png'), alt: 'Tennis', caption: { en: '@ Tennis', zh: '@ 网球' } },
+  { id: 'img6', type: 'image', src: resolveAsset('/tennis2.png'), alt: 'Tennis', caption: { en: '@ Tennis', zh: '@ 网球' } },
 
   // Row 4: Image, Text, Image
-  { id: 'img7', type: 'image', src: '/education1.jpeg', alt: 'Education', caption: { en: '@ Volunteer', zh: '@ 志愿服务' } },
+  { id: 'img7', type: 'image', src: resolveAsset('/education1.jpeg'), alt: 'Education', caption: { en: '@ Volunteer', zh: '@ 志愿服务' } },
   { id: 'txt3', type: 'text', emojis: '# 📚 # 🤝 # 💡', content: { en: '<- Volunteer teaching and crisis center responding. Giving back to the community. ->', zh: '<- 志愿支教和危机中心响应工作。回馈社区。->' } },
-  { id: 'img8', type: 'image', src: '/education2.png', alt: 'Education', caption: { en: '@ Social Work', zh: '@ 社会工作' } },
+  { id: 'img8', type: 'image', src: resolveAsset('/education2.png'), alt: 'Education', caption: { en: '@ Social Work', zh: '@ 社会工作' } },
 
   // Row 5: Image, Image, Text
-  { id: 'img9', type: 'image', src: '/crisis1.jpeg', alt: 'Crisis Center', caption: { en: '@ Crisis Center', zh: '@ 危机中心' } },
-  { id: 'img10', type: 'image', src: '/crisis2.jpeg', alt: 'Support', caption: { en: '@ Support', zh: '@ 支持' } },
+  { id: 'img9', type: 'image', src: resolveAsset('/crisis1.jpeg'), alt: 'Crisis Center', caption: { en: '@ Crisis Center', zh: '@ 危机中心' } },
+  { id: 'img10', type: 'image', src: resolveAsset('/crisis2.jpeg'), alt: 'Support', caption: { en: '@ Support', zh: '@ 支持' } },
   { id: 'txt4', type: 'text', emojis: '# 💜 # 🫂 # 🕊️', content: { en: '<- Supporting survivors of domestic violence and sexual assault at the crisis center.', zh: '<- 在危机中心为家庭暴力和性侵犯的幸存者提供支持。' } },
 ];
 
