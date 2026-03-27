@@ -489,7 +489,7 @@ const Hero = ({ setSection, lang }: { setSection: (s: Section) => void, lang: La
           className="relative aspect-square md:aspect-[4/5] bg-stone-100 rounded-3xl overflow-hidden group shadow-2xl"
         >
           <img 
-            src={resolveAsset("/profile.png")} 
+            src={resolveAsset("/chapel.jpeg")} 
             alt="Runchu Wu"
             onError={(e) => {
               e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop";
