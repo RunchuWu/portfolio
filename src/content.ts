@@ -1,4 +1,4 @@
-export type ProjectSlug = "dkumoves" | "humanai" | "liberata";
+export type ProjectSlug = "dkumoves" | "sovi" | "humanai" | "liberata";
 
 export interface CaseStudy {
   slug: ProjectSlug;
@@ -83,6 +83,55 @@ export const caseStudies: CaseStudy[] = [
       {value:"~3K",label:"campus audience the redesign serves"},
     ],
     scopeNote: "This case study presents an implemented MVP using mock data and local in-memory flows. It does not claim production adoption or measured behavior change; those require backend integration and live evaluation.",
+    nextSlug: "sovi",
+    nextTitle: "Sovi.AI",
+  },
+  {
+    slug: "sovi",
+    title: "Sovi.AI",
+    type: "AI learning product · Product strategy · Interaction design",
+    period: "Dreame Technology · Summer 2025",
+    oneLiner: "Taking Smart PDF Parsing from an open-ended AI idea to a launched learning workflow with measurable early repeat use.",
+    tags: ["0→1 product", "AI UX", "User journeys", "Cross-functional delivery"],
+    cover: "",
+    externalUrl: "https://mysovi.ai/",
+    caseLede: "How do you make an AI study companion feel more useful than a generic chat box—especially when the source material is a long, messy PDF?",
+    role: "AI Product Manager Intern · Feature Owner",
+    focus: "PDF learning workflow · Requirements · Launch iteration",
+    stack: "Product research · User flows · Prototyping · Analytics",
+    challengeTitle: "Uploading a document was easy. Turning it into a useful study session was not.",
+    challenge: [
+      "AI education products were converging on the same interaction: upload a file, open a chat box, and hope the model understood what mattered. That left students to invent the workflow, judge whether answers were grounded, and repeatedly explain what they wanted.",
+      "The opportunity was not simply better parsing. Sovi.AI needed to turn an unstructured PDF into a legible learning path while fitting an existing product, engineering constraints, and a fast commercial release cycle.",
+    ],
+    strategyTitle: "Design the learning loop around the document, not the model.",
+    strategyIntro: "I reframed Smart PDF Parsing as a sequence of user decisions. Each stage had to answer a concrete question: Was my file understood? Where should I begin? Can I trust this response? What should I ask next?",
+    flow: ["Upload PDF", "Confirm parsing", "Scan structure", "Ask in context", "Follow up", "Return to study"],
+    principles: [
+      {title:"Show what the system understood",description:"Document structure and parsing status create a visible handoff between upload and AI assistance instead of hiding processing behind a spinner."},
+      {title:"Keep answers anchored",description:"The source document remains the center of the experience, helping students connect explanations and follow-up questions to the material they are studying."},
+      {title:"Design for the next question",description:"A useful first answer should reduce effort for the second. Follow-up behavior became both an interaction goal and an early signal of product value."},
+    ],
+    buildIntro: "My work connected discovery to delivery: I translated a broad AI capability into a reviewable journey, explicit feature requirements, edge states, launch criteria, and questions the team could measure after release.",
+    buildPoints: [
+      "Compared more than 50 AI, education, productivity, and document tools to identify where generic chat workflows broke down and where Sovi.AI could differentiate.",
+      "Mapped the journey from upload and parsing to document exploration, grounded Q&A, follow-up, history, and return use.",
+      "Wrote product requirements and acceptance criteria covering core behavior, loading and failure states, source context, and handoffs between product surfaces.",
+      "Worked with design and engineering through requirement reviews, implementation tradeoffs, launch readiness, and post-launch behavior review.",
+    ],
+    architecture: ["Market + user evidence", "Product brief", "End-to-end journey", "Interface states", "Engineering requirements", "Launch telemetry + iteration"],
+    collaboration: [
+      {title:"Give design a behavioral brief",description:"I framed the intended user decisions, hierarchy, and edge states so visual exploration stayed tied to the learning problem rather than a collection of AI components."},
+      {title:"Give engineering testable boundaries",description:"Requirements separated must-have launch behavior from later ideas and made parsing, response, error, and follow-up states concrete enough to estimate and verify."},
+      {title:"Bring evidence back into the roadmap",description:"Competitive research shaped the initial direction; early usage patterns and cross-functional reviews shaped what the team should improve next."},
+    ],
+    outcome: "Smart PDF Parsing moved from concept to a shipped Sovi.AI workflow. Early internal launch telemetry suggested that users were not only trying the feature but continuing the conversation—evidence the team could use to prioritize the next iteration.",
+    evidence: [
+      {value:"0→1",label:"feature taken from concept to launch"},
+      {value:">50%",label:"of product users tried it in the first two weeks"},
+      {value:"3+",label:"average follow-up questions per session"},
+    ],
+    scopeNote: "Sovi.AI is a team-built commercial product. This case study covers my internship contribution to Smart PDF Parsing and adjacent roadmap research, not the full platform. Adoption figures are internal early-launch telemetry recorded during the internship; they are directional rather than a public, independently audited study.",
     nextSlug: "humanai",
     nextTitle: "HumanAI Trust Calibration Engine",
   },

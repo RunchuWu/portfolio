@@ -18,6 +18,7 @@ const homeHref = (section?: string) => `${import.meta.env.BASE_URL}${section ? `
 
 function parseRoute(): Route {
   if (window.location.hash === "#/work/dkumoves") return { page: "case", slug: "dkumoves" };
+  if (window.location.hash === "#/work/sovi") return { page: "case", slug: "sovi" };
   if (window.location.hash === "#/work/humanai") return { page: "case", slug: "humanai" };
   if (window.location.hash === "#/work/liberata") return { page: "case", slug: "liberata" };
   return { page: "home" };
@@ -102,6 +103,7 @@ function ProjectVisual({ project }: { project: CaseStudy }) {
       <div className="cue-chip">5 cue modules</div>
     </div>
   );
+  if (project.slug === "sovi") return <SoviVisual />;
   return (
     <div className="liberata-visual">
       <div className="liberata-browser">
@@ -131,13 +133,13 @@ function HomePage() {
 
       <section className="work shell" id="work">
         <div className="section-label"><span>01</span><p>Selected work</p><i /></div>
-        <div className="work-intro"><h2>Three products.<br />Three kinds of complexity.</h2><p>From campus behavior change and academic discovery to controlled AI research, I design the product logic, the interface language, and the implementation path.</p></div>
+        <div className="work-intro"><h2>Four products.<br />Four kinds of complexity.</h2><p>From campus behavior change and commercial AI learning to academic discovery and controlled research, I design the product logic, the interface language, and the implementation path.</p></div>
         <div className="project-grid">
           {caseStudies.map((project, index) => (
             <article className={`project-card project-${project.slug}`} key={project.slug}>
               <a href={`#/work/${project.slug}`} className="project-visual-link" aria-label={`Read ${project.title} case study`}><ProjectVisual project={project} /></a>
               <div className="project-card-copy">
-                <div className="project-index">0{index + 1} / 03</div>
+                <div className="project-index">0{index + 1} / 04</div>
                 <div className="project-meta">{project.type}<span>{project.period}</span></div>
                 <h3>{project.title}</h3>
                 <p>{project.oneLiner}</p>
@@ -203,7 +205,7 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
         <div className="principle-grid">{project.principles.map((item,index)=><article key={item.title}><span>0{index+1}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
       </section>
 
-      {project.slug === "dkumoves" ? <DkuShowcase /> : project.slug === "humanai" ? <HumanAiShowcase /> : <LiberataShowcase />}
+      {project.slug === "dkumoves" ? <DkuShowcase /> : project.slug === "sovi" ? <SoviShowcase /> : project.slug === "humanai" ? <HumanAiShowcase /> : <LiberataShowcase />}
 
       <section className="case-build shell">
         <div className="case-section-head"><span>03</span><h2>From interface decisions to implementation.</h2></div>
@@ -232,6 +234,50 @@ function DkuShowcase() {
       <div className="case-section-head"><span>02</span><h2>A campus movement system, not another fitness tracker.</h2></div>
       <div className="dku-screen-stage"><PhoneFrame screen="home" /><div className="screen-callouts"><article><span>A</span><h3>One dashboard, one next action</h3><p>Points, progress, active challenge, and recent activity answer “where am I?” before asking users to log more.</p></article><article><span>B</span><h3>Visible feedback after every action</h3><p>Estimated points, review status, streaks, and progress make an administrative workflow feel responsive.</p></article></div><PhoneFrame screen="challenge" /></div>
       <div className="design-system"><div><small>PRODUCT PALETTE</small><h3>DKU energy without varsity clichés.</h3><p>Deep campus green establishes trust; warm gold makes rewards and milestones feel earned; blue is reserved for comparison and ranking.</p></div><div className="swatches"><span style={{background:'#163f2c'}}><i>#163F2C</i></span><span style={{background:'#1f7a4d'}}><i>#1F7A4D</i></span><span style={{background:'#f2b84b'}}><i>#F2B84B</i></span><span style={{background:'#3b7dd8'}}><i>#3B7DD8</i></span></div></div>
+    </section>
+  );
+}
+
+function SoviVisual() {
+  return (
+    <div className="sovi-visual" aria-label="Sovi.AI Smart PDF Parsing product workflow model">
+      <div className="sovi-orbit sovi-orbit-one" />
+      <div className="sovi-orbit sovi-orbit-two" />
+      <div className="sovi-document">
+        <div className="sovi-document-head"><span>PDF</span><i>Parsed</i></div>
+        <b>Course reading</b>
+        <span className="sovi-line sovi-line-long" /><span className="sovi-line" /><span className="sovi-line sovi-line-short" />
+        <div className="sovi-outline"><span>01</span><p>Key concepts detected</p></div>
+        <div className="sovi-outline"><span>02</span><p>Evidence kept in context</p></div>
+      </div>
+      <div className="sovi-conversation">
+        <small>ASK SOVI · DOCUMENT CONTEXT</small>
+        <p>Explain the main argument in simpler language.</p>
+        <div><i>S</i><span>Here is the core idea, grounded in the section you selected…</span></div>
+        <span className="sovi-followup">Ask a follow-up <ArrowRight /></span>
+      </div>
+      <span className="visual-note">Workflow model · feature shipped in the commercial product</span>
+    </div>
+  );
+}
+
+function SoviShowcase() {
+  const decisions = [
+    ["01", "Orient", "Confirm the upload worked and expose enough document structure to help the student choose where to begin."],
+    ["02", "Ground", "Keep the source visible in the interaction model so an explanation feels connected to evidence, not generated in isolation."],
+    ["03", "Continue", "Make the next question effortless; follow-up depth becomes a product-value signal, not just a chat behavior."],
+  ];
+  return (
+    <section className="showcase sovi-showcase shell">
+      <div className="case-section-head"><span>02</span><h2>Turn a document into a guided learning loop.</h2></div>
+      <div className="sovi-decision-map">
+        <div className="sovi-map-visual"><SoviVisual /></div>
+        <div className="sovi-map-copy">{decisions.map(([number,title,copy]) => <article key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
+      </div>
+      <div className="sovi-evidence-strip">
+        <div><small>PRODUCT ARTIFACTS</small><h3>Research → requirements → launch review</h3><p>The case is structured around the artifacts I owned: competitive analysis, user journeys, feature and edge-state requirements, cross-functional reviews, and early telemetry interpretation.</p></div>
+        <ExternalAnchor href="https://mysovi.ai/" className="sovi-product-link">Visit the current Sovi.AI product <ExternalLink /></ExternalAnchor>
+      </div>
     </section>
   );
 }
