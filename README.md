@@ -5,7 +5,6 @@ A case-study portfolio for work at the intersection of AI web coding, UX/UI desi
 ## Featured work
 
 - `#/work/dkumoves` — DKU Moves product strategy, mobile UX, design system, and Expo implementation
-- `#/work/sovi` — Sovi.AI Smart PDF Parsing product strategy, AI learning UX, and 0-to-1 delivery
 - `#/work/humanai` — HumanAI Trust Calibration Engine participant UX, researcher tooling, and full-stack research infrastructure
 - `#/work/liberata` — Liberata progressive access, ORCID identity, literature discovery, and full-stack product engineering
 

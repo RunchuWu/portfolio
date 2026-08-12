@@ -18,7 +18,6 @@ const homeHref = (section?: string) => `${import.meta.env.BASE_URL}${section ? `
 
 function parseRoute(): Route {
   if (window.location.hash === "#/work/dkumoves") return { page: "case", slug: "dkumoves" };
-  if (window.location.hash === "#/work/sovi") return { page: "case", slug: "sovi" };
   if (window.location.hash === "#/work/humanai") return { page: "case", slug: "humanai" };
   if (window.location.hash === "#/work/liberata") return { page: "case", slug: "liberata" };
   return { page: "home" };
@@ -65,36 +64,25 @@ function CapabilityMark() {
   );
 }
 
-function PhoneFrame({ screen }: { screen: "home" | "challenge" }) {
-  return (
-    <div className={`phone phone-${screen}`} aria-label={`DKU Moves ${screen} interface reconstruction`}>
-      <div className="phone-speaker" />
-      <div className="phone-status"><span>9:41</span><span>● ●</span></div>
-      {screen === "home" ? (
-        <div className="phone-content">
-          <div className="phone-head"><div><small>TODAY AT DKU</small><h4>Hi, Runchu</h4></div><b>R</b></div>
-          <div className="points-card"><small>Total points</small><strong>4,280</strong><div><span><b>186.4</b> km</span><span><b>9</b> days</span><span><b>#12</b> rank</span></div><button>Log activity</button></div>
-          <div className="phone-section"><b>Active challenge</b><span>All</span></div>
-          <div className="mini-card"><b>Lake Loop Month</b><p>Collect 60 km around campus.</p><div className="progress"><i /></div><small>43.5 / 60 km</small></div>
-          <div className="phone-section"><b>Recent activity</b><span>Profile</span></div>
-          <div className="activity-row"><i>RUN</i><div><b>Running</b><small>6.2 km · 36 min</small></div><strong>+145</strong></div>
-        </div>
-      ) : (
-        <div className="phone-content">
-          <div className="phone-page-title"><small>MOVE TOGETHER</small><h4>Challenges</h4><p>Turn weekly movement into shared progress.</p></div>
-          <div className="challenge-card active"><small>JOINED · 386 PEOPLE</small><h4>Lake Loop Month</h4><p>Collect 60 km around campus before the end of May.</p><div className="progress"><i /></div><b>72% complete</b></div>
-          <div className="challenge-card"><small>JOINED · 214 PEOPLE</small><h4>Dorm Streak Sprint</h4><p>Stay active for 14 days with your residential college.</p><div className="progress second"><i /></div><b>9 / 14 active days</b></div>
-          <div className="challenge-card upcoming"><small>UP NEXT</small><h4>Summer Points Kickoff</h4><button>Join challenge</button></div>
-        </div>
-      )}
-      <div className="phone-tabs"><span>⌂</span><span>◎</span><span>＋</span><span>♜</span></div>
-    </div>
-  );
+type DkuScreen = "home" | "log" | "share" | "market" | "campus" | "profile";
+
+const dkuScreens: Record<DkuScreen, { src: string; alt: string }> = {
+  home: { src: "/work/dkumoves/home-anonymized.png", alt: "DKUMoves home dashboard with daily progress, streak, points, and campus rank" },
+  log: { src: "/work/dkumoves/log-activity.png", alt: "DKUMoves activity logging workflow with sport selection" },
+  share: { src: "/work/dkumoves/share-anonymized.png", alt: "DKUMoves generated activity share card" },
+  market: { src: "/work/dkumoves/market-anonymized.png", alt: "DKUMoves MoveStack rewards marketplace" },
+  campus: { src: "/work/dkumoves/campus-ranking.png", alt: "DKUMoves campus activity pulse and group rankings" },
+  profile: { src: "/work/dkumoves/profile-anonymized.png", alt: "DKUMoves profile and activity history entry point" },
+};
+
+function DkuDevice({ screen, className = "" }: { screen: DkuScreen; className?: string }) {
+  const item = dkuScreens[screen];
+  return <div className={`dku-device ${className}`}><div className="dku-device-island" /><img src={asset(item.src)} alt={item.alt} /></div>;
 }
 
 function ProjectVisual({ project }: { project: CaseStudy }) {
   if (project.slug === "dkumoves") {
-    return <div className="dku-visual"><PhoneFrame screen="home" /><PhoneFrame screen="challenge" /><span className="visual-note">Built as an Expo + React Native MVP</span></div>;
+    return <div className="dku-visual"><DkuDevice screen="home" className="dku-device-home" /><DkuDevice screen="log" className="dku-device-log" /><DkuDevice screen="campus" className="dku-device-campus" /><span className="visual-note">Production workflow · personal data anonymized</span></div>;
   }
   if (project.slug === "humanai") return (
     <div className="humanai-visual">
@@ -103,7 +91,6 @@ function ProjectVisual({ project }: { project: CaseStudy }) {
       <div className="cue-chip">5 cue modules</div>
     </div>
   );
-  if (project.slug === "sovi") return <SoviVisual />;
   return (
     <div className="liberata-visual">
       <div className="liberata-browser">
@@ -133,13 +120,13 @@ function HomePage() {
 
       <section className="work shell" id="work">
         <div className="section-label"><span>01</span><p>Selected work</p><i /></div>
-        <div className="work-intro"><h2>Four products.<br />Four kinds of complexity.</h2><p>From campus behavior change and commercial AI learning to academic discovery and controlled research, I design the product logic, the interface language, and the implementation path.</p></div>
+        <div className="work-intro"><h2>Three products.<br />Three kinds of complexity.</h2><p>From campus behavior change and controlled research to academic discovery, I design the product logic, the interface language, and the implementation path.</p></div>
         <div className="project-grid">
           {caseStudies.map((project, index) => (
             <article className={`project-card project-${project.slug}`} key={project.slug}>
               <a href={`#/work/${project.slug}`} className="project-visual-link" aria-label={`Read ${project.title} case study`}><ProjectVisual project={project} /></a>
               <div className="project-card-copy">
-                <div className="project-index">0{index + 1} / 04</div>
+                <div className="project-index">0{index + 1} / 03</div>
                 <div className="project-meta">{project.type}<span>{project.period}</span></div>
                 <h3>{project.title}</h3>
                 <p>{project.oneLiner}</p>
@@ -205,7 +192,7 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
         <div className="principle-grid">{project.principles.map((item,index)=><article key={item.title}><span>0{index+1}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
       </section>
 
-      {project.slug === "dkumoves" ? <DkuShowcase /> : project.slug === "sovi" ? <SoviShowcase /> : project.slug === "humanai" ? <HumanAiShowcase /> : <LiberataShowcase />}
+      {project.slug === "dkumoves" ? <DkuShowcase /> : project.slug === "humanai" ? <HumanAiShowcase /> : <LiberataShowcase />}
 
       <section className="case-build shell">
         <div className="case-section-head"><span>03</span><h2>From interface decisions to implementation.</h2></div>
@@ -229,55 +216,21 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
 }
 
 function DkuShowcase() {
+  const workflow: Array<{ screen: DkuScreen; number: string; title: string; copy: string }> = [
+    { screen: "home", number: "01", title: "Orient around today", copy: "Daily distance, streak, points, and campus rank establish one legible starting point." },
+    { screen: "log", number: "02", title: "Choose how you moved", copy: "A staged logging flow makes a broad activity catalog feel fast on a phone." },
+    { screen: "share", number: "03", title: "Turn effort into identity", copy: "A generated activity card transforms a private check-in into a shareable campus moment." },
+    { screen: "market", number: "04", title: "Make points tangible", copy: "The Market closes the incentive loop with visible balance, inventory, and redemption states." },
+    { screen: "campus", number: "05", title: "See collective momentum", copy: "Group and individual rankings connect personal movement to the wider DKU community." },
+    { screen: "profile", number: "06", title: "Keep progress ownable", copy: "Profile brings history, achievements, share cards, and account controls into one personal space." },
+  ];
   return (
     <section className="showcase dku-showcase shell">
       <div className="case-section-head"><span>02</span><h2>A campus movement system, not another fitness tracker.</h2></div>
-      <div className="dku-screen-stage"><PhoneFrame screen="home" /><div className="screen-callouts"><article><span>A</span><h3>One dashboard, one next action</h3><p>Points, progress, active challenge, and recent activity answer “where am I?” before asking users to log more.</p></article><article><span>B</span><h3>Visible feedback after every action</h3><p>Estimated points, review status, streaks, and progress make an administrative workflow feel responsive.</p></article></div><PhoneFrame screen="challenge" /></div>
-      <div className="design-system"><div><small>PRODUCT PALETTE</small><h3>DKU energy without varsity clichés.</h3><p>Deep campus green establishes trust; warm gold makes rewards and milestones feel earned; blue is reserved for comparison and ranking.</p></div><div className="swatches"><span style={{background:'#163f2c'}}><i>#163F2C</i></span><span style={{background:'#1f7a4d'}}><i>#1F7A4D</i></span><span style={{background:'#f2b84b'}}><i>#F2B84B</i></span><span style={{background:'#3b7dd8'}}><i>#3B7DD8</i></span></div></div>
-    </section>
-  );
-}
-
-function SoviVisual() {
-  return (
-    <div className="sovi-visual" aria-label="Sovi.AI Smart PDF Parsing product workflow model">
-      <div className="sovi-orbit sovi-orbit-one" />
-      <div className="sovi-orbit sovi-orbit-two" />
-      <div className="sovi-document">
-        <div className="sovi-document-head"><span>PDF</span><i>Parsed</i></div>
-        <b>Course reading</b>
-        <span className="sovi-line sovi-line-long" /><span className="sovi-line" /><span className="sovi-line sovi-line-short" />
-        <div className="sovi-outline"><span>01</span><p>Key concepts detected</p></div>
-        <div className="sovi-outline"><span>02</span><p>Evidence kept in context</p></div>
-      </div>
-      <div className="sovi-conversation">
-        <small>ASK SOVI · DOCUMENT CONTEXT</small>
-        <p>Explain the main argument in simpler language.</p>
-        <div><i>S</i><span>Here is the core idea, grounded in the section you selected…</span></div>
-        <span className="sovi-followup">Ask a follow-up <ArrowRight /></span>
-      </div>
-      <span className="visual-note">Workflow model · feature shipped in the commercial product</span>
-    </div>
-  );
-}
-
-function SoviShowcase() {
-  const decisions = [
-    ["01", "Orient", "Confirm the upload worked and expose enough document structure to help the student choose where to begin."],
-    ["02", "Ground", "Keep the source visible in the interaction model so an explanation feels connected to evidence, not generated in isolation."],
-    ["03", "Continue", "Make the next question effortless; follow-up depth becomes a product-value signal, not just a chat behavior."],
-  ];
-  return (
-    <section className="showcase sovi-showcase shell">
-      <div className="case-section-head"><span>02</span><h2>Turn a document into a guided learning loop.</h2></div>
-      <div className="sovi-decision-map">
-        <div className="sovi-map-visual"><SoviVisual /></div>
-        <div className="sovi-map-copy">{decisions.map(([number,title,copy]) => <article key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
-      </div>
-      <div className="sovi-evidence-strip">
-        <div><small>PRODUCT ARTIFACTS</small><h3>Research → requirements → launch review</h3><p>The case is structured around the artifacts I owned: competitive analysis, user journeys, feature and edge-state requirements, cross-functional reviews, and early telemetry interpretation.</p></div>
-        <ExternalAnchor href="https://mysovi.ai/" className="sovi-product-link">Visit the current Sovi.AI product <ExternalLink /></ExternalAnchor>
-      </div>
+      <p className="section-deck">The shipped workflow connects six product surfaces into one participation loop: understand today, log effort, celebrate it, redeem value, compare progress, and build a durable activity identity.</p>
+      <div className="dku-workflow-grid">{workflow.map((item) => <figure key={item.screen}><div className="dku-workflow-device"><DkuDevice screen={item.screen} /></div><figcaption><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></figcaption></figure>)}</div>
+      <div className="dku-privacy-note"><span>REAL PRODUCT · PORTFOLIO-SAFE</span><p>These screens come from the current DKUMoves workflow. Names, email, avatar, privileged controls, and internal test reward labels were replaced with neutral content; product structure and interaction states remain faithful to the implementation.</p></div>
+      <div className="design-system"><div><small>PRODUCT PALETTE</small><h3>Campus energy with a clear reward signal.</h3><p>DKU blue anchors navigation and trust; orange marks achievement and action; teal distinguishes progress and community status.</p></div><div className="swatches"><span style={{background:'#0d4694'}}><i>#0D4694</i></span><span style={{background:'#157d78'}}><i>#157D78</i></span><span style={{background:'#ff7417'}}><i>#FF7417</i></span><span style={{background:'#eaf1fb'}}><i>#EAF1FB</i></span></div></div>
     </section>
   );
 }
