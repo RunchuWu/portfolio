@@ -1,30 +1,46 @@
-export type ProjectSlug = "dkumoves" | "humanai" | "liberata";
+export type ProjectSlug = "dkumoves" | "humanai" | "sovi" | "liberata";
+export type MediaKind = "phone" | "desktop" | "diagram";
+
+export interface MediaItem {
+  src?: string;
+  fullSrc?: string;
+  alt: string;
+  eyebrow: string;
+  title: string;
+  caption: string;
+  kind: MediaKind;
+  render?: "sovi-study-flow";
+}
+
+export interface SummaryFact {
+  label: "Problem" | "Decision" | "Outcome";
+  text: string;
+}
+
+export interface ProcessArtifact {
+  title: string;
+  caption: string;
+  steps: string[];
+  visual: "loop" | "conditions" | "learning" | "session";
+  image?: MediaItem;
+  colors?: string[];
+}
 
 export interface CaseStudy {
   slug: ProjectSlug;
   title: string;
   type: string;
   period: string;
-  oneLiner: string;
-  tags: string[];
-  cover: string;
-  externalUrl?: string;
-  caseLede: string;
+  homeLine: string;
   role: string;
   focus: string;
-  stack: string;
-  challengeTitle: string;
-  challenge: string[];
-  strategyTitle: string;
-  strategyIntro: string;
-  flow: string[];
-  principles: Array<{title:string;description:string}>;
-  buildIntro: string;
-  buildPoints: string[];
-  architecture: string[];
-  collaboration: Array<{title:string;description:string}>;
-  outcome: string;
-  evidence: Array<{value:string;label:string}>;
+  tools: string;
+  heroLine: string;
+  externalUrl?: string;
+  media: MediaItem[];
+  summaryFacts: SummaryFact[];
+  processArtifact: ProcessArtifact;
+  metrics: Array<{ value: string; label: string }>;
   scopeNote: string;
   nextSlug: ProjectSlug;
   nextTitle: string;
@@ -34,157 +50,286 @@ export const profile = {
   email: "rw312@duke.edu",
   github: "https://github.com/RunchuWu",
   linkedin: "https://www.linkedin.com/in/runchuwu",
-  bio: "I’m Runchu, a Duke and DKU undergraduate who moves comfortably between product conversations, Figma decisions, and production code. I care about the small interaction choices that make complex systems feel obvious—and the technical structure that keeps those choices shippable.",
+  bio: "I move from product framing and interaction design to production code—making complex AI systems feel clear, useful, and shippable.",
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     slug: "dkumoves",
     title: "DKU Moves",
-    type: "Product strategy · UX/UI · Full-stack product delivery",
+    type: "Product strategy · UX/UI · Full-stack",
     period: "2026 — present",
-    oneLiner: "Redesigning a campus activity tracker into a community engagement loop for roughly 3,000 students, staff, and faculty.",
-    tags: ["Product ownership","Interaction design","Design system","React + FastAPI"],
-    cover: "",
-    caseLede: "How do you turn a functional upload-and-points tool into a product people want to return to—and a system a campus team can actually operate?",
-    role: "Contracted Product Owner · Design & Front-End Lead",
-    focus: "Behavior change · Community engagement · Cross-platform UX",
-    stack: "React · TypeScript · FastAPI · MySQL · Mobile WebView",
-    challengeTitle: "The existing utility captured activity. It did not create momentum.",
-    challenge: [
-      "DKU Moves began as a functional campus tool centered on uploads and point collection. That model completed an administrative task, but offered little reason to explore, compete, celebrate progress, or return between submissions.",
-      "The redesign had to serve a diverse campus population while staying realistic for a small implementation team. The product needed a stronger engagement model, a coherent visual language, and clean seams for a backend that was still being finalized.",
+    homeLine: "A campus activity product that turns movement into visible community momentum.",
+    role: "Product Owner · Design & Front-End Lead",
+    focus: "Behavior change · Community",
+    tools: "React · FastAPI · MySQL",
+    heroLine: "Turning a points utility into a participation loop for the entire campus.",
+    externalUrl: "https://app.moves.dukekunshan.edu.cn/",
+    media: [
+      {
+        src: "/work/dkumoves/home-anonymized.webp",
+        fullSrc: "/work/dkumoves/home-anonymized.png",
+        alt: "DKU Moves home dashboard with daily distance, streak, points, and campus rank",
+        eyebrow: "01 · Home",
+        title: "Start with today",
+        caption: "Progress, streak, points, and rank create one clear starting point.",
+        kind: "phone",
+      },
+      {
+        src: "/work/dkumoves/log-activity.webp",
+        fullSrc: "/work/dkumoves/log-activity.png",
+        alt: "DKU Moves activity logging workflow with sport selection",
+        eyebrow: "02 · Log",
+        title: "Reduce logging effort",
+        caption: "A staged selector makes a broad activity catalog feel fast.",
+        kind: "phone",
+      },
+      {
+        src: "/work/dkumoves/share-anonymized.webp",
+        fullSrc: "/work/dkumoves/share-anonymized.png",
+        alt: "DKU Moves generated activity sharing card",
+        eyebrow: "03 · Share",
+        title: "Make effort visible",
+        caption: "A generated card turns a check-in into a campus moment.",
+        kind: "phone",
+      },
+      {
+        src: "/work/dkumoves/market-anonymized.webp",
+        fullSrc: "/work/dkumoves/market-anonymized.png",
+        alt: "DKU Moves rewards marketplace showing point balance and inventory",
+        eyebrow: "04 · Market",
+        title: "Close the reward loop",
+        caption: "Balance, inventory, and redemption states make points tangible.",
+        kind: "phone",
+      },
+      {
+        src: "/work/dkumoves/campus-ranking.webp",
+        fullSrc: "/work/dkumoves/campus-ranking.png",
+        alt: "DKU Moves campus activity pulse and group rankings",
+        eyebrow: "05 · Campus",
+        title: "See collective momentum",
+        caption: "Rankings connect individual movement to the wider community.",
+        kind: "phone",
+      },
+      {
+        src: "/work/dkumoves/profile-anonymized.webp",
+        fullSrc: "/work/dkumoves/profile-anonymized.png",
+        alt: "DKU Moves profile with personal progress and activity history",
+        eyebrow: "06 · Profile",
+        title: "Own the progress",
+        caption: "History and achievements build a durable activity identity.",
+        kind: "phone",
+      },
     ],
-    strategyTitle: "Design the loop before designing the screens.",
-    strategyIntro: "I reframed the product around a repeatable participation loop. Every feature had to either reduce the effort of logging activity, make progress legible, or turn individual movement into campus-level motivation.",
-    flow: ["Move","Log proof","Earn points","Join challenges","Compare progress","Redeem + share"],
-    principles: [
-      {title:"Progress before promotion",description:"The home screen leads with a user’s points, distance, streak, and active challenge—not announcements or inventory."},
-      {title:"Community at multiple scales",description:"Personal history, residential challenges, and campus leaderboards let users participate without a single definition of fitness."},
-      {title:"Trust through explicit states",description:"Estimated points, pending approval, available stock, and joined challenges make system status visible instead of mysterious."},
+    summaryFacts: [
+      { label: "Problem", text: "The old upload-and-points utility completed a task but gave people little reason to return." },
+      { label: "Decision", text: "Connect daily progress, sharing, rankings, and rewards into one repeatable participation loop." },
+      { label: "Outcome", text: "A working phone-first product spanning real authentication, activity, ranking, reward, and profile services." },
     ],
-    buildIntro: "I evolved the early prototype into a connected product system: responsive enough for a phone-first workflow, explicit enough for operational review, and structured around real authentication, activity, ranking, reward, and profile data.",
-    buildPoints: [
-      "Built reusable cards, navigation, activity selectors, progress treatments, empty states, and action patterns from shared UI foundations.",
-      "Implemented dashboard, multi-step activity logging, rankings, rewards, generated share cards, profile, privacy, and authentication flows.",
-      "Connected the React client to a FastAPI service layer and legacy campus data model while preserving clear product-facing state boundaries.",
-      "Designed validation, loading, success, error, inventory, privacy, pending, and empty states—not only ideal screenshots.",
+    processArtifact: {
+      title: "Design the loop before the screens.",
+      caption: "Every surface either reduces logging effort, clarifies progress, or turns personal movement into shared momentum.",
+      steps: ["Move", "Log", "Earn", "Share", "Compare", "Redeem"],
+      visual: "loop",
+      colors: ["#0d4694", "#157d78", "#ff7417", "#eaf1fb"],
+    },
+    metrics: [
+      { value: "6", label: "connected product surfaces shown" },
+      { value: "~3K", label: "students, staff, and faculty served" },
+      { value: "E2E", label: "React client to campus data services" },
     ],
-    architecture: ["Responsive React client","Feature modules","Reusable UI primitives","Typed API client","FastAPI services","Legacy MySQL integration"],
-    collaboration: [
-      {title:"Scope the reviewable MVP",description:"I translated broad ambitions—community, gamification, rewards—into a navigable product shell the team could critique before backend dependencies were final."},
-      {title:"Give engineering clean seams",description:"Business logic lives behind shared models and a service interface, making the integration contract visible to the backend collaborator."},
-      {title:"Make decisions legible",description:"The product loop, state model, and token system give product and engineering teams concrete artifacts to discuss instead of subjective screen feedback."},
-    ],
-    outcome: "The result is a working phone-first product that carries the redesigned participation loop across daily progress, logging, sharing, rewards, campus rankings, and personal history. The current workflow is implemented against real product services rather than presented only as a prototype.",
-    evidence: [
-      {value:"9",label:"product surfaces implemented"},
-      {value:"1",label:"shared token + component system"},
-      {value:"~3K",label:"campus audience the redesign serves"},
-    ],
-    scopeNote: "The interface captures in this case study come from the implemented DKUMoves workflow. Personal data, privileged controls, and internal test labels were anonymized for portfolio use. The case does not claim measured behavior change without a formal live evaluation.",
+    scopeNote: "Real implemented workflow; personal data and privileged controls are anonymized. No behavior-change claim is made without formal evaluation.",
     nextSlug: "humanai",
     nextTitle: "HumanAI Trust Calibration Engine",
   },
   {
     slug: "humanai",
     title: "HumanAI Trust Calibration Engine",
-    type: "AI research product · UX architecture · Full-stack engineering",
+    type: "Research UX · Product architecture · Engineering",
     period: "Google Summer of Code 2026",
-    oneLiner: "Turning a complex behavioral study into a clear participant experience and a controllable research platform.",
-    tags: ["Human-AI interaction","Research UX","System design","Next.js"],
-    cover: "/work/humanai-participant.jpg",
-    caseLede: "How do you design an experiment that feels simple to participants while preserving the control, traceability, and flexibility researchers need behind the scenes?",
+    homeLine: "A controlled AI study made simple for participants and inspectable for researchers.",
     role: "GSoC Contributor · Product, UX & Engineering",
-    focus: "Trust calibration · Experiment UX · Research tooling",
-    stack: "Next.js · TypeScript · JSONL · CSV · Playwright",
-    challengeTitle: "Scientific control and participant clarity pull in opposite directions.",
-    challenge: [
-      "The platform studies whether humanlike and authority-signaling interface cues change how people follow or override AI recommendations in transportation and drone-operations scenarios.",
-      "Participants need a focused, comprehensible task. Researchers need configurable conditions, stable identities, inspectable cue metadata, reproducible exports, and fast ways to review every experiment state. Mixing those needs into one interface would compromise both.",
+    focus: "Trust calibration · Research tooling",
+    tools: "Next.js · TypeScript · Playwright",
+    heroLine: "One experiment platform, designed for two radically different users.",
+    media: [
+      {
+        src: "/work/humanai-participant.jpg",
+        alt: "Participant-facing HumanAI operational decision task",
+        eyebrow: "01 · Participant",
+        title: "Clarity under pressure",
+        caption: "Staged information and neutral actions protect the decision task.",
+        kind: "desktop",
+      },
+      {
+        src: "/work/humanai-researcher.jpg",
+        alt: "Researcher debug interface with condition and cue controls",
+        eyebrow: "02 · Researcher",
+        title: "Control without contamination",
+        caption: "Conditions, cue inspection, and screen jumps stay researcher-only.",
+        kind: "desktop",
+      },
+      {
+        src: "/work/humanai-export.jpg",
+        alt: "HumanAI researcher export quality assurance interface",
+        eyebrow: "03 · Data",
+        title: "Analysis-ready by design",
+        caption: "Typed events and filtered exports preserve every decision context.",
+        kind: "desktop",
+      },
     ],
-    strategyTitle: "Separate the experience from the control plane.",
-    strategyIntro: "I designed two connected surfaces around a single experiment model: a quiet participant flow that reveals information in deliberate stages, and a researcher workspace that exposes configuration, navigation, and data without contaminating the study.",
-    flow: ["Consent","Comprehend","Practice","Review situation","Inspect evidence","Follow or override","Debrief"],
-    principles: [
-      {title:"Stage cognitive load",description:"Situation, evidence, and recommendation appear in sequence so participants understand the decision instead of scanning a dense dashboard."},
-      {title:"Keep decisions visually neutral",description:"Follow AI and choose opposite receive equal visual weight, reducing interface-induced preference."},
-      {title:"Design for reversibility",description:"Participants can revisit trials and revise answers while the append-only event history preserves what changed."},
+    summaryFacts: [
+      { label: "Problem", text: "Participant clarity and scientific control require different information, actions, and levels of system visibility." },
+      { label: "Decision", text: "Separate a quiet participant journey from a powerful researcher control plane." },
+      { label: "Outcome", text: "A complete, documented experiment platform with deterministic QA and analysis-ready export." },
     ],
-    buildIntro: "The interface is backed by a modular condition and event architecture. Product decisions—what a researcher can vary, what a participant can see, what an analyst can recover—are represented directly in types, schemas, and routes.",
-    buildPoints: [
-      "Implemented control, industry-set, and user-set cue-source conditions with five independently configurable humanlike cue modules.",
-      "Built the complete flow from consent and comprehension checks to practice, ten main trials, review, and debrief.",
-      "Instrumented task-shown and decision events with participant, session, condition, trial, recommendation, ground truth, follow/override, correctness, cue, and latency data.",
-      "Created researcher-only condition forcing, screen jumping, event previews, run summaries, and filtered JSON/CSV export.",
+    processArtifact: {
+      title: "Turn theory into composable variables.",
+      caption: "Three cue-source conditions share one experiment model and five independently configurable humanlike cues.",
+      steps: ["Consent", "Practice", "Situation", "Evidence", "Decide", "Debrief"],
+      visual: "conditions",
+    },
+    metrics: [
+      { value: "3", label: "cue-source conditions" },
+      { value: "5", label: "humanlike cue modules" },
+      { value: "10", label: "fixed decision trials" },
     ],
-    architecture: ["Participant flow","Condition + cue engine","Typed event schema","Append-only run store","Researcher controls","Analysis-ready export"],
-    collaboration: [
-      {title:"Respond to a changing brief",description:"After mentor feedback, I migrated the study from hiring decisions to transportation and drone operations without discarding the core assignment and logging architecture."},
-      {title:"Translate theory into UI variables",description:"I mapped Human–System–Fit dimensions to concrete interface cues while keeping unapproved research decisions out of the participant runtime."},
-      {title:"Document decisions, not just code",description:"Plans, schemas, stimulus matrices, walkthroughs, QA reports, and a decision tracker made the platform reviewable by people who did not build it."},
+    scopeNote: "Internal walkthroughs and synthetic QA validate implementation and data integrity—not participant behavior or a scientific hypothesis.",
+    nextSlug: "sovi",
+    nextTitle: "Sovi.AI",
+  },
+  {
+    slug: "sovi",
+    title: "Sovi.AI",
+    type: "AI product strategy · Interaction design",
+    period: "Dreame Technology · 2025",
+    homeLine: "A document-learning workflow shipped from product brief to early repeat use.",
+    role: "AI Product Manager Intern · Feature Owner",
+    focus: "PDF learning · Launch iteration",
+    tools: "Research · Flows · PRD · Analytics",
+    heroLine: "Designing an AI study loop around the document—not an empty chat box.",
+    externalUrl: "https://mysovi.ai/study",
+    media: [
+      {
+        src: "/work/sovi/scan.webp",
+        fullSrc: "/work/sovi/scan.png",
+        alt: "Official Sovi.AI product visual showing question capture and scan processing",
+        eyebrow: "01 · Capture",
+        title: "Meet the material",
+        caption: "Start from the student’s own question or learning material.",
+        kind: "phone",
+      },
+      {
+        src: "/work/sovi/solve.webp",
+        fullSrc: "/work/sovi/solve.png",
+        alt: "Official Sovi.AI product visual showing a structured step-by-step explanation",
+        eyebrow: "02 · Explain",
+        title: "Structure the answer",
+        caption: "Step-by-step output makes the reasoning scannable and actionable.",
+        kind: "phone",
+      },
+      {
+        render: "sovi-study-flow",
+        alt: "Flow diagram based on Sovi.AI's public AI Study feature showing supported source materials and study outputs",
+        eyebrow: "03 · Study",
+        title: "Work from your files",
+        caption: "PDF and document tools create a reusable learning workspace.",
+        kind: "diagram",
+      },
     ],
-    outcome: "The final GSoC work product is a complete, documented experiment platform ready for controlled internal review and extension. The participant flow, researcher tools, exports, accessibility behavior, and deterministic QA all passed the project’s final verification chain.",
-    evidence: [
-      {value:"3",label:"configurable cue-source conditions"},
-      {value:"5",label:"independent humanlike cue modules"},
-      {value:"10",label:"fixed operational decision trials"},
+    summaryFacts: [
+      { label: "Problem", text: "Generic upload-and-chat products leave students to invent the learning workflow and judge grounding themselves." },
+      { label: "Decision", text: "Make parsing status, document structure, grounded answers, and follow-up questions one guided loop." },
+      { label: "Outcome", text: "Smart PDF Parsing moved from product brief to a shipped commercial workflow." },
     ],
-    scopeNote: "The walkthrough and synthetic QA validate implementation behavior and data integrity. They are not presented as a real-participant study or as evidence for a scientific hypothesis.",
+    processArtifact: {
+      title: "Design for the next question.",
+      caption: "A useful first answer should make the second question easier—and give the team a signal of repeat value.",
+      steps: ["Upload", "Parse", "Orient", "Ask", "Follow up"],
+      visual: "learning",
+    },
+    metrics: [
+      { value: "0→1", label: "feature concept to launch" },
+      { value: ">50%", label: "users tried it in two weeks" },
+      { value: "3+", label: "follow-ups per session" },
+    ],
+    scopeNote: "Team-built commercial product. Metrics are directional early internal telemetry recorded during the internship, not independently audited results.",
     nextSlug: "liberata",
     nextTitle: "Liberata",
   },
   {
     slug: "liberata",
     title: "Liberata",
-    type: "Academic publishing · Product engineering · Full-stack",
+    type: "Discovery UX · Product engineering · Identity",
     period: "2025",
-    oneLiner: "Reducing the identity and discovery barriers between a first-time visitor and useful scholarly work.",
-    tags: ["Product architecture","ORCID OAuth","Discovery UX","Next.js"],
-    cover: "/work/liberata-logo.png",
+    homeLine: "A lower-friction path from scholarly discovery to verified researcher identity.",
+    role: "Full-Stack Engineer · Auth & Discovery",
+    focus: "Progressive access · Search",
+    tools: "Next.js · Supabase · ORCID",
+    heroLine: "Let researchers experience the platform’s value before asking them to sign in.",
     externalUrl: "https://liberata.info/",
-    caseLede: "How do you let researchers experience the value of an academic platform before asking them to understand a new publishing system—or create another account?",
-    role: "Full-Stack Engineer · Authentication & Discovery",
-    focus: "Progressive access · Researcher identity · Literature discovery",
-    stack: "Next.js 15 · TypeScript · Supabase · PostgreSQL · ORCID",
-    challengeTitle: "The product had value behind an identity wall.",
-    challenge: [
-      "Liberata is an open-access publishing platform with incentivized quality controls. Its product model asks researchers to learn new ideas about contribution shares, peer review, replication, and academic capital.",
-      "Requiring authentication before discovery added another unfamiliar decision at the very start. The experience needed to support curious visitors, ORCID-verified researchers, and returning members without fragmenting the platform into three unrelated products.",
+    media: [
+      {
+        src: "/work/liberata/literature-browse.webp",
+        fullSrc: "/work/liberata/literature-browse.png",
+        alt: "Liberata literature browsing interface with fielded search and paper results",
+        eyebrow: "01 · Discover",
+        title: "Browse before commitment",
+        caption: "Real literature gives first-time visitors a reason to continue.",
+        kind: "desktop",
+      },
+      {
+        src: "/work/liberata/peer-review.webp",
+        fullSrc: "/work/liberata/peer-review.png",
+        alt: "Liberata peer review product interface",
+        eyebrow: "02 · Participate",
+        title: "Reveal deeper actions",
+        caption: "Identity appears when a durable researcher action needs it.",
+        kind: "desktop",
+      },
+      {
+        src: "/work/liberata/replication.webp",
+        fullSrc: "/work/liberata/replication.png",
+        alt: "Liberata replication workflow interface",
+        eyebrow: "03 · Contribute",
+        title: "Keep one product language",
+        caption: "Discovery and contribution share a coherent navigation system.",
+        kind: "desktop",
+      },
     ],
-    strategyTitle: "Let value earn the sign-in.",
-    strategyIntro: "I designed the access model as a progression rather than a gate: make literature genuinely browsable, introduce identity only when it unlocks a meaningful action, and preserve one coherent session model underneath.",
-    flow: ["Arrive","Browse as guest","Search by field or tag","Evaluate a paper","Save or contribute","Connect ORCID"],
-    principles: [
-      {title:"Value before commitment",description:"Guest browsing lets a first-time visitor understand the product through real scholarly content before deciding whether to connect an identity."},
-      {title:"Identity at the right moment",description:"ORCID is introduced as the path to durable, researcher-specific actions—not as an unexplained obstacle on the landing page."},
-      {title:"Search in researcher language",description:"Fielded queries and partial tag matching support the ways people actually look for literature: title, author, institution, topic, or a combination."},
+    summaryFacts: [
+      { label: "Problem", text: "An identity wall asked visitors to understand a new publishing model before they could experience its value." },
+      { label: "Decision", text: "Let guests browse first, then introduce ORCID at the first identity-dependent action." },
+      { label: "Outcome", text: "A coherent path across guest discovery, researcher identity, and member participation." },
     ],
-    buildIntro: "The UX work was inseparable from the platform architecture. Guest and verified experiences had to share navigation and discovery behavior while authentication, sessions, search, and saved state remained secure and traceable.",
-    buildPoints: [
-      "Implemented a three-tier access model spanning guest browsing, ORCID-connected researchers, and registered Liberata members.",
-      "Built and deployed the ORCID OAuth flow, callback handling, authentication state, and supporting troubleshooting documentation.",
-      "Unified guest and ORCID activity under a typed session model so behavior could be analyzed without conflating identity states.",
-      "Delivered literature browsing, manuscript saving, and end-to-end tag search with partial matching, safe topic handling, API changes, and database migrations.",
+    processArtifact: {
+      title: "Separate activity from authentication.",
+      caption: "A unified session layer tracks guest and member journeys without coupling analytics to the authentication schema.",
+      steps: ["Guest", "Browse", "Save", "Connect ORCID", "Contribute"],
+      visual: "session",
+      image: {
+        src: "/work/liberata/session-architecture.webp",
+        fullSrc: "/work/liberata/session-architecture.png",
+        alt: "Hand-drawn architecture showing Liberata guest and authenticated session tracking",
+        eyebrow: "Selected process",
+        title: "Guest + member session model",
+        caption: "One traceable layer across progressive access states.",
+        kind: "diagram",
+      },
+    },
+    metrics: [
+      { value: "3", label: "progressive access states" },
+      { value: "1", label: "unified session model" },
+      { value: "E2E", label: "tag search from UI to database" },
     ],
-    architecture: ["Next.js product surfaces","Auth provider + middleware","ORCID OAuth","Unified session tracking","Literature search APIs","Supabase + PostgreSQL RPCs"],
-    collaboration: [
-      {title:"Translate policy into product states",description:"I turned abstract access requirements into concrete guest, connected, and member capabilities the product and engineering teams could review."},
-      {title:"Own the full interaction contract",description:"Search and authentication changes crossed interface components, route handling, API validation, database functions, and deployment configuration."},
-      {title:"Make integration knowledge reusable",description:"Authentication, guest-mode, session, deployment, troubleshooting, and public test-plan documentation reduced hidden context for later contributors."},
-    ],
-    outcome: "My contribution established a lower-friction entry path into Liberata and the technical foundation connecting discovery behavior to researcher identity. Visitors could browse first, search more precisely, and encounter ORCID when an authenticated action made its value clear.",
-    evidence: [
-      {value:"3",label:"coherent access states"},
-      {value:"1",label:"unified guest + ORCID session model"},
-      {value:"E2E",label:"tag search from UI to database"},
-    ],
-    scopeNote: "Liberata is a team-built production platform. This case study is limited to the authentication, guest access, session tracking, literature browsing, saving, and tag-search work documented in my contributions; it does not claim ownership of the full publishing, peer-review, or replication product.",
+    scopeNote: "Team-built production platform. This case covers my authentication, guest access, sessions, literature discovery, saving, and tag-search work.",
     nextSlug: "dkumoves",
     nextTitle: "DKU Moves",
   },
 ];
 
-export const experience = [
-  {company:"Dreame Technology",role:"AI Product Manager Intern",period:"2025",detail:"Competitive research across 50+ AI tools; translated user needs into workflows, prototypes, requirements, launch criteria, and post-launch review."},
+export const selectedExperience = [
+  { organization: "DKU Moves", role: "Product Owner · Design & Front-End", period: "2026 — present" },
+  { organization: "Google Summer of Code", role: "Product, UX & Engineering Contributor", period: "2026" },
+  { organization: "Dreame Technology", role: "AI Product Manager Intern", period: "2025" },
 ];
