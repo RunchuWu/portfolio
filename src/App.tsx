@@ -33,6 +33,16 @@ function ResearchFigure({ kind }: { kind: "speech" | "cognitive" }) {
   </figure>;
 }
 
+function ProjectCover({ project }: { project: CaseStudy }) {
+  const images = project.slug === "liberata" ? project.media.slice(0, 1) : project.media.slice(0, 2);
+  return <div className={`work-cover cover-${project.slug}`}>
+    <div className="cover-images">
+      {images.map(item => <img key={item.src} src={asset(item.src!)} alt={item.alt} loading="lazy" decoding="async" />)}
+    </div>
+    <span className="cover-action" aria-hidden="true"><ArrowUpRight /></span>
+  </div>;
+}
+
 function HomePage() {
   return <main id="main" className="shell" tabIndex={-1}>
     <section className="intro" aria-labelledby="intro-title">
@@ -58,11 +68,27 @@ function HomePage() {
     </section>
     <section id="work" className="other-work" aria-labelledby="work-title">
       <div className="section-heading"><h2 id="work-title">Other selected work</h2></div>
-      {(["dkumoves", "liberata", "sovi"] as const).map(slug => {
+      <div className="work-grid">{(["dkumoves", "liberata", "sovi"] as const).map(slug => {
         const project = caseStudies.find(item => item.slug === slug)!;
-        const descriptions = { dkumoves: "Campus activity product · Product owner, design & front end", liberata: "Research platform · Authentication & discovery", sovi: "AI learning product · Product management internship" };
-        return <article className="work-row" key={slug}><h3><a href={`#/work/${slug}`}>{project.title}<ArrowUpRight aria-hidden="true" /></a></h3><p>{descriptions[slug]}</p><span>{project.period}</span></article>;
-      })}
+        const descriptions = {
+          dkumoves: { type: "Campus & community", text: "Making everyday movement part of campus life.", role: "Product owner · Design & front end" },
+          liberata: { type: "Research tools", text: "From discovering literature to participating in research.", role: "Engineering · Authentication & discovery" },
+          sovi: { type: "AI & learning", text: "Turning study materials into a guided learning workflow.", role: "Product management internship" },
+        };
+        const description = descriptions[slug];
+        return <article className="work-card" key={slug}>
+          <a className="work-card-link" href={`#/work/${slug}`} aria-labelledby={`work-${slug}-title`}>
+            <ProjectCover project={project} />
+            <div className="work-card-copy">
+              <p className="eyebrow">{description.type}</p>
+              <h3 id={`work-${slug}-title`}>{project.title}</h3>
+              <p className="work-description">{description.text}</p>
+              <p className="work-role">{description.role}</p>
+              <span className="work-period">{project.period}</span>
+            </div>
+          </a>
+        </article>;
+      })}</div>
     </section>
     <section id="contact" className="contact-section" aria-labelledby="contact-title"><h2 id="contact-title">Contact</h2><p>For research conversations, collaborations, or a hello.</p><ContactLinks full /></section>
   </main>;
