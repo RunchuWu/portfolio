@@ -50,7 +50,8 @@ export const profile = {
   email: "rw312@duke.edu",
   github: "https://github.com/RunchuWu",
   linkedin: "https://www.linkedin.com/in/runchuwu",
-  bio: "I move from product framing and interaction design to production code—making complex AI systems feel clear, useful, and shippable.",
+  twitter: "https://x.com/runchuwu",
+  bio: "I study how AI systems behave and how people interact with them, with a focus on speech language model safety, human–AI trust calibration, and cognitive state monitoring.",
 };
 
 export const caseStudies: CaseStudy[] = [

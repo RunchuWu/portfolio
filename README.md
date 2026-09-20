@@ -1,13 +1,21 @@
-# Runchu Wu — AI Product Design Portfolio
+# Runchu Wu — HCI & Responsible AI
 
-A case-study portfolio for work at the intersection of AI web coding, UX/UI design, product strategy, and frontend engineering.
+A restrained research portfolio featuring speech language model safety, human–AI trust calibration, and cognitive state monitoring, followed by selected product and engineering work.
 
-## Featured work
+## Content
 
-- `#/work/dkumoves` — DKU Moves product strategy, mobile UX, design system, and Expo implementation
-- `#/work/humanai` — HumanAI Trust Calibration Engine participant UX, researcher tooling, and full-stack research infrastructure
-- `#/work/sovi` — Sovi.AI Smart PDF Parsing product strategy, AI learning UX, and 0-to-1 delivery
-- `#/work/liberata` — Liberata progressive access, ORCID identity, literature discovery, and full-stack product engineering
+- `src/content.ts` contains contact details and existing project materials.
+- `src/App.tsx` contains the research overview and page templates.
+- Speech safety and cognitive monitoring illustrations are conceptual research-area overviews, not experimental results.
+- HumanAI materials document research infrastructure. Synthetic QA does not establish participant outcomes.
+- Email, GitHub, LinkedIn, and Twitter / X (@runchuwu) appear in the introduction and contact section.
+
+## Project pages
+
+- `#/work/humanai` — HumanAI Trust Calibration Engine
+- `#/work/dkumoves` — DKU Moves
+- `#/work/liberata` — Liberata
+- `#/work/sovi` — Sovi.AI
 
 ## Development
 
@@ -18,4 +26,4 @@ npm run lint
 npm run build
 ```
 
-GitHub Pages builds with the existing `/portfolio/` base path.
+GitHub Pages builds with the existing `/portfolio/` base path. Run `GITHUB_ACTIONS=true npm run build` to validate that deployment configuration locally.
