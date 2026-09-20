@@ -34,11 +34,16 @@ function ResearchFigure({ kind }: { kind: "speech" | "cognitive" }) {
 }
 
 function ProjectCover({ project }: { project: CaseStudy }) {
-  const images = project.slug === "liberata" ? project.media.slice(0, 1) : project.media.slice(0, 2);
+  const hasArtDirection = project.slug === "dkumoves" || project.slug === "sovi";
+  const item = project.media[project.slug === "sovi" ? 1 : 0];
   return <div className={`work-cover cover-${project.slug}`}>
-    <div className="cover-images">
-      {images.map(item => <img key={item.src} src={asset(item.src!)} alt={item.alt} loading="lazy" decoding="async" />)}
-    </div>
+    {hasArtDirection ? <div className="cover-composition">
+      <div className="cover-type" aria-hidden="true">
+        <span>{project.slug === "dkumoves" ? "DKU MOVES" : "Sovi.AI"}</span>
+        <p>{project.slug === "dkumoves" ? <>Move,<br /><em>together.</em></> : <>A clearer<br />way to<br /><em>learn.</em></>}</p>
+      </div>
+      <div className="cover-focus"><img src={asset(item.src!)} alt={item.alt} loading="lazy" decoding="async" /></div>
+    </div> : <div className="cover-images"><img src={asset(item.src!)} alt={item.alt} loading="lazy" decoding="async" /></div>}
     <span className="cover-action" aria-hidden="true"><ArrowUpRight /></span>
   </div>;
 }
@@ -98,6 +103,24 @@ function SoviStudyFlow() {
   return <div className="study-flow"><p>PDF · Text · Word · Presentations</p><span aria-hidden="true">↓</span><strong>Document-based study folder</strong><span aria-hidden="true">↓</span><p>Summaries · Knowledge maps · Document chat · Quizzes</p><small>Based on Sovi.AI’s public AI Study feature.</small></div>;
 }
 
+function ProjectStory({ project, onOpen }: { project: CaseStudy; onOpen: (item: MediaItem) => void }) {
+  return <section className={`project-story story-${project.slug}`} aria-labelledby="materials-title">
+    <div className="story-heading"><h2 id="materials-title">{project.slug === "dkumoves" ? "A rhythm for campus life" : "From a question to understanding"}</h2><p>Inside the experience</p></div>
+    {project.media.map(item => <figure className="story-chapter" key={item.src ?? item.render}>
+      <div className={`story-stage${item.render ? " story-stage-diagram" : ""}`}>
+        {item.render ? <SoviStudyFlow /> : <button className="story-image" onClick={() => onOpen(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /></button>}
+      </div>
+      <figcaption className="story-caption">
+        <span className="eyebrow">{item.eyebrow}</span>
+        <h3>{item.title}</h3>
+        <p>{item.caption}</p>
+        {!item.render && <button className="story-inspect" onClick={() => onOpen(item)}>Inspect interface <ArrowUpRight aria-hidden="true" /></button>}
+        {project.slug === "sovi" && !item.render && <small>Official Sovi.AI product imagery</small>}
+      </figcaption>
+    </figure>)}
+  </section>;
+}
+
 function ImageViewer({ item, onClose }: { item: MediaItem | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -119,7 +142,7 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
     <a className="back-link" href={homeHref(isResearch ? "research" : "work")}><ArrowLeft aria-hidden="true" />{isResearch ? "Back to research" : "Back to other work"}</a>
     <header className="case-intro"><p className="eyebrow">{isResearch ? "Research tooling · Human–AI interaction" : project.type} · {project.period}</p><h1>{project.title}</h1><p className="case-lede">{isResearch ? "An experiment platform for studying how people respond to AI advice." : project.heroLine}</p><dl className="case-facts"><div><dt>My contribution</dt><dd>{project.role}</dd></div><div><dt>Focus</dt><dd>{project.focus}</dd></div><div><dt>Tools</dt><dd>{project.tools}</dd></div></dl>{project.externalUrl && <ExternalAnchor href={project.externalUrl}>Visit product</ExternalAnchor>}</header>
     <section className="overview" aria-labelledby="overview-title"><h2 id="overview-title">{isResearch ? "Research infrastructure" : "Project overview"}</h2><div className="summary-facts">{project.summaryFacts.map(fact => <div key={fact.label}><h3>{fact.label}</h3><p>{fact.text}</p></div>)}</div><aside className="scope-note"><h3>Scope & evidence</h3><p>{project.scopeNote}</p></aside></section>
-    <section className="project-materials" aria-labelledby="materials-title"><h2 id="materials-title">{isResearch ? "Experiment interfaces" : "Selected interfaces"}</h2><div className="media-grid">{project.media.map(item => <figure key={item.src ?? item.render} className={`media-item media-${item.kind}`}>{item.render ? <SoviStudyFlow /> : <button className="image-button" onClick={() => setImage(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /><span>View image ↗</span></button>}<figcaption><h3>{item.title}</h3><p>{item.caption}</p></figcaption></figure>)}</div></section>
+    {project.slug === "dkumoves" || project.slug === "sovi" ? <ProjectStory project={project} onOpen={setImage} /> : <section className="project-materials" aria-labelledby="materials-title"><h2 id="materials-title">{isResearch ? "Experiment interfaces" : "Selected interfaces"}</h2><div className="media-grid">{project.media.map(item => <figure key={item.src ?? item.render} className={`media-item media-${item.kind}`}>{item.render ? <SoviStudyFlow /> : <button className="image-button" onClick={() => setImage(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /><span>View image ↗</span></button>}<figcaption><h3>{item.title}</h3><p>{item.caption}</p></figcaption></figure>)}</div></section>}
     <section className="process-section" aria-labelledby="process-title"><h2 id="process-title">{project.processArtifact.title}</h2><p>{project.processArtifact.caption}</p>{project.processArtifact.image ? <button className="image-button process-image" onClick={() => setImage(project.processArtifact.image!)} aria-label="Enlarge session architecture"><img src={asset(project.processArtifact.image.src!)} alt={project.processArtifact.image.alt} loading="lazy" /><span>View image ↗</span></button> : <ol className="process-steps">{project.processArtifact.steps.map(step => <li key={step}>{step}</li>)}</ol>}<dl className="metrics">{project.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl></section>
     <div className="case-end"><a href={homeHref("research")}>All research & projects</a><a href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight aria-hidden="true" /></a></div>
     <ImageViewer item={image} onClose={() => setImage(null)} />
