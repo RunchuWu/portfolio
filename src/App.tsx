@@ -19,7 +19,7 @@ function ContactLinks() {
 
 function Header() {
   return <header className="site-header shell">
-    <nav aria-label="Primary navigation"><a href={homeHref("research")}>Research</a><a href={homeHref("work")}>Projects</a><a href={homeHref("contact")}>Contact</a></nav>
+    <nav aria-label="Primary navigation"><a href={homeHref("about")}>About</a><a href={homeHref("research")}>Research</a><a href={homeHref("work")}>Projects</a><a href={homeHref("contact")}>Contact</a></nav>
   </header>;
 }
 
@@ -44,10 +44,16 @@ function ProjectCover({ project }: { project: CaseStudy }) {
 
 function HomePage() {
   return <main id="main" className="shell" tabIndex={-1}>
-    <section className="intro" aria-labelledby="intro-title">
-      <h1 id="intro-title">Runchu Wu</h1>
-      <p className="bio">{profile.bio}</p>
-      <ContactLinks />
+    <section id="about" className="about-section" aria-labelledby="about-title">
+      <div className="about-identity">
+        <div className="about-portrait-frame"><img className="about-portrait" src={asset("/chapel.webp")} alt="Portrait of Runchu Wu" width={1050} height={1400} fetchPriority="high" /></div>
+        <h1>Runchu (Rachel) Wu</h1>
+        <ContactLinks />
+      </div>
+      <div className="about-copy">
+        <h2 id="about-title">About</h2>
+        {profile.about.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+      </div>
     </section>
     <section id="research" className="research" aria-labelledby="research-title">
       <div className="section-heading"><h2 id="research-title">Research</h2></div>

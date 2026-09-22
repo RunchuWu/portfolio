@@ -3,9 +3,11 @@
 Keep this portfolio restrained, readable and simple. Apply these preferences consistently across projects; the user's latest explicit instructions take precedence.
 
 - The homepage research and project entries contain only a cover image and title. Keep detailed descriptions on the project pages.
-- Name the two homepage sections “Research” and “Projects”; use “Projects” in the navigation too, without “Other” or “Selected”.
-- Show the author's name once in the homepage introduction. Do not repeat it in the header or footer, or add a small field-of-study label above it.
-- Keep contact links as accessible icons below the introduction, with descriptive accessible names and hover labels. Do not duplicate a Contact section at the bottom.
+- Order the homepage sections and navigation as About, Research and Projects; use “Projects” without “Other” or “Selected”.
+- About uses a portrait on the left with a modestly sized author name underneath, and a wider introduction area on the right. Stack these on mobile. Keep the introduction in a few editable paragraphs about background, research and project experience.
+- Frame the About portrait in a circle with the face centered and some background visible, using a reversible CSS crop. Center “Runchu (Rachel) Wu” beneath the portrait. Major section headings use an expressive but restrained italic serif in dark green, with consistent hierarchy above the plain body text.
+- Show the author's name once below the About portrait. Do not repeat it in the header or footer, or add a small field-of-study label above it.
+- Keep contact links as accessible icons below the name, with descriptive accessible names and hover labels. Do not duplicate a Contact section at the bottom.
 - On selected product-project pages, put the project title first, followed directly by role, Tools and a single product link. Use readable text around 16–17 px, not tiny metadata labels.
 - Keep project detail pages organized into a few substantial sections: Project Overview, Selected Interfaces, and Outcome (or Current Activity when appropriate). Concise means clear hierarchy and restrained prose, not stripping out the story or all explanation.
 - Use a short overview explaining the project and the author's contribution. Show original interface images with a short descriptive heading and one or two useful sentences beside each image on desktop, stacked below it on mobile. No tiny numbered labels, separate cards, inspection buttons or click-to-enlarge interactions. Preserve aspect ratios and descriptive alt text; do not overlap screenshots.

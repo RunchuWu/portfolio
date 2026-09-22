@@ -54,6 +54,11 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/runchuwu",
   twitter: "https://x.com/runchuwu",
   bio: "I study how AI systems behave and how people interact with them, with a focus on speech language model safety, human–AI trust calibration, and cognitive state monitoring.",
+  about: [
+    "I'm a senior at Duke Kunshan University, interested in Human–Computer Interaction and Responsible AI. I study how AI systems behave and how people understand, trust and interact with them.",
+    "My current research includes mitigating and diagnosing failures in speech language models, as well as building tools to study human–AI trust calibration. I'm also interested in cognitive state monitoring and how it can inform human–AI interaction.",
+    "Alongside research, I work on product design and development. Projects such as DKU Moves, Sovi.AI and Liberata have given me opportunities to work across interface design, engineering and the everyday experiences of people using these systems.",
+  ],
 };
 
 export const caseStudies: CaseStudy[] = [
