@@ -36,6 +36,7 @@ export interface CaseStudy {
   focus: string;
   tools: string;
   heroLine: string;
+  overview: string;
   externalUrl?: string;
   media: MediaItem[];
   summaryFacts: SummaryFact[];
@@ -57,6 +58,7 @@ export const profile = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "dkumoves",
+    overview: "DKU Moves helps students, staff and faculty record activities, follow their progress and take part in campus challenges. As product owner and design and front-end lead, I worked on activity logging, sharing, rankings and rewards. The platform serves around 3,000 people across the university.",
     title: "DKU Moves",
     type: "Product strategy · UX/UI · Full-stack",
     period: "2026 — present",
@@ -145,6 +147,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "sovi",
+    overview: "Sovi.AI helps students work through questions and study materials. During my product management internship at Dreame Technology, I took the Smart PDF Parsing feature from its initial brief to launch, shaping the flow from uploading a document to asking grounded follow-up questions.",
     title: "Sovi.AI",
     type: "AI product strategy · Interaction design",
     period: "Dreame Technology · 2025",
@@ -204,6 +207,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "liberata",
+    overview: "Liberata connects literature discovery with research participation. As a full-stack engineer, I worked on browsing, search and researcher identity, allowing visitors to explore papers before signing in with ORCID to save or contribute.",
     title: "Liberata",
     type: "Discovery UX · Product engineering · Identity",
     period: "2025",

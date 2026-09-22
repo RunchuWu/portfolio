@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowLeft, ArrowUpRight, Github, Linkedin, Mail, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Github, Linkedin, Mail, X } from "lucide-react";
 import { caseStudies, profile, type CaseStudy, type MediaItem } from "./content";
 import { researchProjects } from "./research";
 import { ResearchPage } from "./ResearchPage";
@@ -7,10 +7,6 @@ import { ResearchPage } from "./ResearchPage";
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 const homeHref = (section = "") => `${import.meta.env.BASE_URL}${section ? `#${section}` : ""}`;
 const siteTitle = "Runchu Wu · HCI & Responsible AI";
-
-function ExternalAnchor({ href, children }: { href: string; children: ReactNode }) {
-  return <a href={href} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight aria-hidden="true" /></a>;
-}
 
 function ContactLinks() {
   return <div id="contact" className="contact-links contact-icons">
@@ -85,19 +81,16 @@ function SoviStudyFlow() {
   return <div className="study-flow"><p>PDF · Text · Word · Presentations</p><span aria-hidden="true">↓</span><strong>Document-based study folder</strong><span aria-hidden="true">↓</span><p>Summaries · Knowledge maps · Document chat · Quizzes</p><small>Based on Sovi.AI’s public AI Study feature.</small></div>;
 }
 
-function ProjectStory({ project, onOpen }: { project: CaseStudy; onOpen: (item: MediaItem) => void }) {
-  return <section className={`project-story story-${project.slug}`} aria-labelledby="materials-title">
-    <div className="story-heading"><h2 id="materials-title">{project.slug === "dkumoves" ? "A rhythm for campus life" : "From a question to understanding"}</h2><p>Inside the experience</p></div>
+function ProjectStory({ project }: { project: CaseStudy }) {
+  return <section className={`project-story story-${project.slug}`} aria-label={`${project.title} images`}>
+
     {project.media.map(item => <figure className="story-chapter" key={item.src ?? item.render}>
       <div className={`story-stage${item.render ? " story-stage-diagram" : ""}`}>
-        {item.render ? <SoviStudyFlow /> : <button className="story-image" onClick={() => onOpen(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /></button>}
+        {item.render ? <SoviStudyFlow /> : <div className="story-image"><img src={asset(item.src!)} alt={item.alt} loading="lazy" /></div>}
       </div>
       <figcaption className="story-caption">
-        <span className="eyebrow">{item.eyebrow}</span>
         <h3>{item.title}</h3>
         <p>{item.caption}</p>
-        {!item.render && <button className="story-inspect" onClick={() => onOpen(item)}>Inspect interface <ArrowUpRight aria-hidden="true" /></button>}
-        {project.slug === "sovi" && !item.render && <small>Official Sovi.AI product imagery</small>}
       </figcaption>
     </figure>)}
   </section>;
@@ -118,15 +111,10 @@ function ImageViewer({ item, onClose }: { item: MediaItem | null; onClose: () =>
 }
 
 function CaseStudyPage({ project }: { project: CaseStudy }) {
-  const [image, setImage] = useState<MediaItem | null>(null);
-  return <main id="main" className="case-page shell" tabIndex={-1}>
-    <a className="back-link" href={homeHref("work")}><ArrowLeft aria-hidden="true" />Back to other work</a>
-    <header className="case-intro"><p className="eyebrow">{project.type} · {project.period}</p><h1>{project.title}</h1><p className="case-lede">{project.heroLine}</p><dl className="case-facts"><div><dt>My contribution</dt><dd>{project.role}</dd></div><div><dt>Focus</dt><dd>{project.focus}</dd></div><div><dt>Tools</dt><dd>{project.tools}</dd></div></dl>{project.externalUrl && <ExternalAnchor href={project.externalUrl}>Visit product</ExternalAnchor>}</header>
-    <section className="overview" aria-labelledby="overview-title"><h2 id="overview-title">Project overview</h2><div className="summary-facts">{project.summaryFacts.map(fact => <div key={fact.label}><h3>{fact.label}</h3><p>{fact.text}</p></div>)}</div><aside className="scope-note"><h3>Scope & evidence</h3><p>{project.scopeNote}</p></aside></section>
-    {project.slug === "dkumoves" || project.slug === "sovi" ? <ProjectStory project={project} onOpen={setImage} /> : <section className="project-materials" aria-labelledby="materials-title"><h2 id="materials-title">Selected interfaces</h2><div className="media-grid">{project.media.map(item => <figure key={item.src ?? item.render} className={`media-item media-${item.kind}`}>{item.render ? <SoviStudyFlow /> : <button className="image-button" onClick={() => setImage(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /><span>View image ↗</span></button>}<figcaption><h3>{item.title}</h3><p>{item.caption}</p></figcaption></figure>)}</div></section>}
-    <section className="process-section" aria-labelledby="process-title"><h2 id="process-title">{project.processArtifact.title}</h2><p>{project.processArtifact.caption}</p>{project.processArtifact.image ? <button className="image-button process-image" onClick={() => setImage(project.processArtifact.image!)} aria-label="Enlarge session architecture"><img src={asset(project.processArtifact.image.src!)} alt={project.processArtifact.image.alt} loading="lazy" /><span>View image ↗</span></button> : <ol className="process-steps">{project.processArtifact.steps.map(step => <li key={step}>{step}</li>)}</ol>}<dl className="metrics">{project.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl></section>
-    <div className="case-end"><a href={homeHref("research")}>All research & projects</a><a href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight aria-hidden="true" /></a></div>
-    <ImageViewer item={image} onClose={() => setImage(null)} />
+  return <main id="main" className="case-page selected-project shell" tabIndex={-1}>
+    <header className="case-intro"><h1>{project.title}</h1></header>
+    <section className="project-overview" aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2><p>{project.overview}</p></section>
+    <ProjectStory project={project} />
   </main>;
 }
 
@@ -159,10 +147,6 @@ export default function App() {
     }}>Skip to content</a>
     <Header />
     {researchProject ? <ResearchPage key={researchProject.slug} slug={researchProject.slug} activeSection={activeSection} onOpen={setResearchImage} /> : project ? <CaseStudyPage key={project.slug} project={project} /> : <HomePage />}
-    <ImageViewer item={researchImage} onClose={() => setResearchImage(null)} />
-    <footer className="site-footer shell"><a href="#top" onClick={event => {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "instant" });
-    }}>Back to top ↑</a></footer>
+    {researchProject && <ImageViewer item={researchImage} onClose={() => setResearchImage(null)} />}
   </div>;
 }

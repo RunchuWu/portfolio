@@ -82,7 +82,7 @@
 .story-chapter:nth-of-type(even) .story-caption { order: 1; }
 .story-stage { display: grid; place-items: center; padding: 30px; min-height: 408px; background: #e9eef1; }
 .story-sovi .story-stage { background: #f2e1df; }
-.story-image { display: block; border: 0; background: transparent; padding: 0; cursor: zoom-in; }
+.story-image { display: block; border: 0; background: transparent; padding: 0; }
 .story-image img { max-height: 348px; width: auto; border-radius: 12px; box-shadow: 0 12px 32px rgb(30 40 50 / .08); }
 .story-sovi .story-image img { max-height: 330px; box-shadow: none; }
 .story-caption { max-width: 340px; }
@@ -224,3 +224,18 @@
   .site-header { align-items: flex-end; }
   .site-footer { align-items: flex-end; }
 }
+
+.selected-project { padding-bottom: 48px; }
+.selected-project .case-intro { padding-bottom: 18px; }
+.selected-project .case-intro h1 { margin-bottom: 0; }
+.project-overview { max-width: 720px; padding-bottom: 36px; }
+.project-overview h2 { font-size: 22px; margin-bottom: 14px; }
+.project-overview p { font-size: 16px; color: var(--muted); }
+.selected-project .project-story { padding-top: 0; border-top: 0; }
+.selected-project .story-caption h3 { margin-top: 0; }
+.story-liberata .story-chapter { grid-template-columns: 1fr; gap: 22px; }
+.story-liberata .story-stage, .story-liberata .story-caption { order: initial; }
+.story-liberata .story-stage { padding: 0; min-height: 0; background: transparent; }
+.story-liberata .story-image img { width: 100%; max-height: none; border-radius: 0; box-shadow: none; }
+.story-liberata .story-caption { max-width: 720px; }
+.research-page { padding-bottom: 48px; }

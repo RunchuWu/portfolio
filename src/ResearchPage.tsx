@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { MediaItem } from "./content";
-import { profile } from "./content";
 import { researchFigures, researchProjects, type ResearchSlug } from "./research";
 
 const sectionNames = ["RQ", "Methodology", "My Contribution", "Dataset", "Main Result"];
@@ -131,6 +130,6 @@ export function ResearchPage({ slug, activeSection, onOpen }: { slug: ResearchSl
     <header className="case-intro research-intro"><p className="eyebrow">{project.area}</p><h1>{project.title}</h1><p className="case-lede">{project.description}</p><div className="research-meta"><p>{project.role}</p><p>{project.status}</p><span>Research update · September 2026</span></div></header>
     <nav className="research-contents" aria-label="Research project sections">{sectionNames.map((name, index) => <a key={name} href={`#/research/${slug}/${sectionIds[index]}`} aria-current={activeSection === sectionIds[index] ? "location" : undefined}><span aria-hidden="true">0{index + 1}</span>{name}</a>)}</nav>
     {slug === "speech" ? <SpeechSections onOpen={onOpen} /> : <TrustSections onOpen={onOpen} />}
-    <div className="case-end"><a href={`#/research/${slug === "speech" ? "humanai" : "speech"}`}>{slug === "speech" ? "Next: Human–AI trust calibration" : "Next: Speech LM mitigation & diagnosis"} <ArrowUpRight aria-hidden="true" /></a><a href={`mailto:${profile.email}`}>Discuss this research <ArrowUpRight aria-hidden="true" /></a></div>
+
   </main>;
 }
