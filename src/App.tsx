@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowLeft, ArrowUpRight, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Github, Linkedin, Mail, X } from "lucide-react";
 import { caseStudies, profile, type CaseStudy, type MediaItem } from "./content";
+import { researchProjects } from "./research";
+import { ResearchPage } from "./ResearchPage";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 const homeHref = (section = "") => `${import.meta.env.BASE_URL}${section ? `#${section}` : ""}`;
@@ -10,27 +12,23 @@ function ExternalAnchor({ href, children }: { href: string; children: ReactNode 
   return <a href={href} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight aria-hidden="true" /></a>;
 }
 
-function ContactLinks({ full = false }: { full?: boolean }) {
-  return <div className="contact-links">
-    <a href={`mailto:${profile.email}`}>{full ? profile.email : "Email"}</a>
-    <ExternalAnchor href={profile.github}>GitHub</ExternalAnchor>
-    <ExternalAnchor href={profile.linkedin}>LinkedIn</ExternalAnchor>
-    <ExternalAnchor href={profile.twitter}>{full ? "Twitter / X · @runchuwu" : "Twitter / X"}</ExternalAnchor>
+function ContactLinks() {
+  return <div id="contact" className="contact-links contact-icons">
+    <a href={`mailto:${profile.email}`} aria-label={`Email ${profile.email}`} title={profile.email}><Mail aria-hidden="true" /></a>
+    <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github aria-hidden="true" /></a>
+    <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin aria-hidden="true" /></a>
+    <a href={profile.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X · @runchuwu" title="Twitter / X · @runchuwu"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z" /></svg></a>
   </div>;
 }
 
 function Header() {
   return <header className="site-header shell">
-    <a className="wordmark" href={homeHref()}>Runchu Wu</a>
     <nav aria-label="Primary navigation"><a href={homeHref("research")}>Research</a><a href={homeHref("work")}>Other work</a><a href={homeHref("contact")}>Contact</a></nav>
   </header>;
 }
 
-function ResearchFigure({ kind }: { kind: "speech" | "cognitive" }) {
-  return <figure className="research-figure">
-    {kind === "speech" ? <div className="concept-nodes"><div><span>Speech model</span><span aria-hidden="true">→</span><span>Audit</span></div><div><span>Diagnosis</span><span aria-hidden="true">→</span><span>Mitigation</span></div></div> : <div className="concept-nodes"><div>Interaction context</div><div>↓ Cognitive state</div><div>↓ Monitoring</div></div>}
-    <figcaption>Research scope · conceptual overview</figcaption>
-  </figure>;
+function ResearchFigure() {
+  return <figure className="research-figure" aria-label="Conceptual overview of cognitive state monitoring"><div className="concept-nodes"><div>Interaction context</div><div>↓ Cognitive state</div><div>↓ Monitoring</div></div></figure>;
 }
 
 function ProjectCover({ project }: { project: CaseStudy }) {
@@ -51,51 +49,35 @@ function ProjectCover({ project }: { project: CaseStudy }) {
 function HomePage() {
   return <main id="main" className="shell" tabIndex={-1}>
     <section className="intro" aria-labelledby="intro-title">
-      <p className="eyebrow">Human-Computer Interaction · Responsible AI</p>
       <h1 id="intro-title">Runchu Wu</h1>
       <p className="bio">{profile.bio}</p>
       <ContactLinks />
     </section>
     <section id="research" className="research" aria-labelledby="research-title">
-      <div className="section-heading"><h2 id="research-title">Research</h2><span>Selected areas & projects</span></div>
+      <div className="section-heading"><h2 id="research-title">Research</h2></div>
+      {researchProjects.map(project => <article className="research-row" key={project.slug}>
+        <figure className="research-figure research-preview"><a href={`#/research/${project.slug}`} aria-label={`Explore ${project.title}`}><img src={asset(project.cover)} alt={project.coverAlt} width={project.coverWidth} height={project.coverHeight} loading="lazy" /></a></figure>
+        <div className="research-copy"><h3><a href={`#/research/${project.slug}`}>{project.title}</a></h3></div>
+      </article>)}
       <article className="research-row">
-        <ResearchFigure kind="speech" />
-        <div className="research-copy"><p className="eyebrow">Research area · Responsible AI</p><h3>Speech language model safety</h3><p>Auditing, diagnosing, and mitigating safety risks in speech language models.</p><details><summary>Research scope</summary><p>I am interested in understanding where speech language models fail, diagnosing the sources of safety risks, and investigating mitigation strategies.</p></details></div>
-      </article>
-      <article className="research-row">
-        <figure className="research-figure"><a href="#/work/humanai" aria-label="Explore the HumanAI Trust Calibration Engine"><img src={asset("/work/humanai-participant.jpg")} width="1280" height="720" alt="HumanAI participant interface showing an AI recommendation and the choice to follow or oppose it" /></a><figcaption>HumanAI · participant interface</figcaption></figure>
-        <div className="research-copy"><p className="eyebrow">Research tooling · GSoC 2026</p><h3><a href="#/work/humanai">Human–AI trust calibration</a></h3><p>An experiment platform for studying trust calibration, with configurable humanlike cues and traceable participant decisions.</p><a className="project-link" href="#/work/humanai">Explore the project <ArrowUpRight aria-hidden="true" /></a></div>
-      </article>
-      <article className="research-row">
-        <ResearchFigure kind="cognitive" />
-        <div className="research-copy"><p className="eyebrow">Research area · Human-Computer Interaction</p><h3>Cognitive state monitoring</h3><p>Investigating cognitive states in the context of human interaction with computing systems.</p><details><summary>Research scope</summary><p>My interests include how cognitive states can be monitored in interaction contexts. The illustration presents the research area rather than a validated measurement pipeline.</p></details></div>
+        <ResearchFigure />
+        <div className="research-copy"><h3>Cognitive state monitoring</h3></div>
       </article>
     </section>
     <section id="work" className="other-work" aria-labelledby="work-title">
       <div className="section-heading"><h2 id="work-title">Other selected work</h2></div>
       <div className="work-grid">{(["dkumoves", "liberata", "sovi"] as const).map(slug => {
         const project = caseStudies.find(item => item.slug === slug)!;
-        const descriptions = {
-          dkumoves: { type: "Campus & community", text: "Making everyday movement part of campus life.", role: "Product owner · Design & front end" },
-          liberata: { type: "Research tools", text: "From discovering literature to participating in research.", role: "Engineering · Authentication & discovery" },
-          sovi: { type: "AI & learning", text: "Turning study materials into a guided learning workflow.", role: "Product management internship" },
-        };
-        const description = descriptions[slug];
         return <article className="work-card" key={slug}>
           <a className="work-card-link" href={`#/work/${slug}`} aria-labelledby={`work-${slug}-title`}>
             <ProjectCover project={project} />
             <div className="work-card-copy">
-              <p className="eyebrow">{description.type}</p>
               <h3 id={`work-${slug}-title`}>{project.title}</h3>
-              <p className="work-description">{description.text}</p>
-              <p className="work-role">{description.role}</p>
-              <span className="work-period">{project.period}</span>
             </div>
           </a>
         </article>;
       })}</div>
     </section>
-    <section id="contact" className="contact-section" aria-labelledby="contact-title"><h2 id="contact-title">Contact</h2><p>For research conversations, collaborations, or a hello.</p><ContactLinks full /></section>
   </main>;
 }
 
@@ -131,18 +113,17 @@ function ImageViewer({ item, onClose }: { item: MediaItem | null; onClose: () =>
     return () => { dialogRef.current?.close(); document.body.style.overflow = previousOverflow; };
   }, [item]);
   return <dialog className="image-viewer" ref={dialogRef} aria-label={item?.title ?? "Project image"} onClose={onClose} onClick={event => { if (event.target === event.currentTarget) dialogRef.current?.close(); }}>
-    {item && <><button autoFocus className="viewer-close" onClick={() => dialogRef.current?.close()}><X aria-hidden="true" /> Close</button><img src={asset(item.fullSrc ?? item.src ?? "")} alt={item.alt} /><p>{item.caption}</p></>}
+    {item && <><button autoFocus className="viewer-close" onClick={() => dialogRef.current?.close()}><X aria-hidden="true" /> Close</button><img src={asset(item.fullSrc ?? item.src ?? "")} alt={item.alt} /><p>{item.caption}</p><a className="viewer-original" href={asset(item.fullSrc ?? item.src ?? "")} target="_blank" rel="noopener noreferrer">Open original image <ArrowUpRight aria-hidden="true" /></a></>}
   </dialog>;
 }
 
 function CaseStudyPage({ project }: { project: CaseStudy }) {
   const [image, setImage] = useState<MediaItem | null>(null);
-  const isResearch = project.slug === "humanai";
   return <main id="main" className="case-page shell" tabIndex={-1}>
-    <a className="back-link" href={homeHref(isResearch ? "research" : "work")}><ArrowLeft aria-hidden="true" />{isResearch ? "Back to research" : "Back to other work"}</a>
-    <header className="case-intro"><p className="eyebrow">{isResearch ? "Research tooling · Human–AI interaction" : project.type} · {project.period}</p><h1>{project.title}</h1><p className="case-lede">{isResearch ? "An experiment platform for studying how people respond to AI advice." : project.heroLine}</p><dl className="case-facts"><div><dt>My contribution</dt><dd>{project.role}</dd></div><div><dt>Focus</dt><dd>{project.focus}</dd></div><div><dt>Tools</dt><dd>{project.tools}</dd></div></dl>{project.externalUrl && <ExternalAnchor href={project.externalUrl}>Visit product</ExternalAnchor>}</header>
-    <section className="overview" aria-labelledby="overview-title"><h2 id="overview-title">{isResearch ? "Research infrastructure" : "Project overview"}</h2><div className="summary-facts">{project.summaryFacts.map(fact => <div key={fact.label}><h3>{fact.label}</h3><p>{fact.text}</p></div>)}</div><aside className="scope-note"><h3>Scope & evidence</h3><p>{project.scopeNote}</p></aside></section>
-    {project.slug === "dkumoves" || project.slug === "sovi" ? <ProjectStory project={project} onOpen={setImage} /> : <section className="project-materials" aria-labelledby="materials-title"><h2 id="materials-title">{isResearch ? "Experiment interfaces" : "Selected interfaces"}</h2><div className="media-grid">{project.media.map(item => <figure key={item.src ?? item.render} className={`media-item media-${item.kind}`}>{item.render ? <SoviStudyFlow /> : <button className="image-button" onClick={() => setImage(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /><span>View image ↗</span></button>}<figcaption><h3>{item.title}</h3><p>{item.caption}</p></figcaption></figure>)}</div></section>}
+    <a className="back-link" href={homeHref("work")}><ArrowLeft aria-hidden="true" />Back to other work</a>
+    <header className="case-intro"><p className="eyebrow">{project.type} · {project.period}</p><h1>{project.title}</h1><p className="case-lede">{project.heroLine}</p><dl className="case-facts"><div><dt>My contribution</dt><dd>{project.role}</dd></div><div><dt>Focus</dt><dd>{project.focus}</dd></div><div><dt>Tools</dt><dd>{project.tools}</dd></div></dl>{project.externalUrl && <ExternalAnchor href={project.externalUrl}>Visit product</ExternalAnchor>}</header>
+    <section className="overview" aria-labelledby="overview-title"><h2 id="overview-title">Project overview</h2><div className="summary-facts">{project.summaryFacts.map(fact => <div key={fact.label}><h3>{fact.label}</h3><p>{fact.text}</p></div>)}</div><aside className="scope-note"><h3>Scope & evidence</h3><p>{project.scopeNote}</p></aside></section>
+    {project.slug === "dkumoves" || project.slug === "sovi" ? <ProjectStory project={project} onOpen={setImage} /> : <section className="project-materials" aria-labelledby="materials-title"><h2 id="materials-title">Selected interfaces</h2><div className="media-grid">{project.media.map(item => <figure key={item.src ?? item.render} className={`media-item media-${item.kind}`}>{item.render ? <SoviStudyFlow /> : <button className="image-button" onClick={() => setImage(item)} aria-label={`Enlarge ${item.title}`}><img src={asset(item.src!)} alt={item.alt} loading="lazy" /><span>View image ↗</span></button>}<figcaption><h3>{item.title}</h3><p>{item.caption}</p></figcaption></figure>)}</div></section>}
     <section className="process-section" aria-labelledby="process-title"><h2 id="process-title">{project.processArtifact.title}</h2><p>{project.processArtifact.caption}</p>{project.processArtifact.image ? <button className="image-button process-image" onClick={() => setImage(project.processArtifact.image!)} aria-label="Enlarge session architecture"><img src={asset(project.processArtifact.image.src!)} alt={project.processArtifact.image.alt} loading="lazy" /><span>View image ↗</span></button> : <ol className="process-steps">{project.processArtifact.steps.map(step => <li key={step}>{step}</li>)}</ol>}<dl className="metrics">{project.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl></section>
     <div className="case-end"><a href={homeHref("research")}>All research & projects</a><a href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight aria-hidden="true" /></a></div>
     <ImageViewer item={image} onClose={() => setImage(null)} />
@@ -152,15 +133,23 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
 export default function App() {
   const [hash, setHash] = useState(() => window.location.hash);
   useEffect(() => { const update = () => setHash(window.location.hash); window.addEventListener("hashchange", update); return () => window.removeEventListener("hashchange", update); }, []);
+  const [researchImage, setResearchImage] = useState<MediaItem | null>(null);
+  const route = hash.split("/");
+  const researchProject = researchProjects.find(item =>
+    (route[1] === "research" && route[2] === item.slug) ||
+    (hash === "#/work/humanai" && item.slug === "humanai")
+  );
+  const activeSection = researchProject && route[1] === "research" ? route[3] : undefined;
   const project = caseStudies.find(item => hash === `#/work/${item.slug}`);
   useEffect(() => {
-    document.title = project ? `${project.title} · Runchu Wu` : siteTitle;
+    document.title = researchProject ? `${researchProject.title} · Runchu Wu` : project ? `${project.title} · Runchu Wu` : siteTitle;
     const frame = requestAnimationFrame(() => {
-      const section = !project && hash.startsWith("#") ? document.getElementById(hash.slice(1)) : null;
+      const section = researchProject && activeSection ? document.getElementById(`${researchProject.slug}-${activeSection}`) : !project && !researchProject && hash.startsWith("#") ? document.getElementById(hash.slice(1)) : null;
       if (section) section.scrollIntoView(); else window.scrollTo({ top: 0, behavior: "instant" });
     });
     return () => cancelAnimationFrame(frame);
-  }, [hash, project]);
+  }, [hash, project, researchProject, activeSection]);
+  useEffect(() => { setResearchImage(null); }, [hash]);
   return <div id="top">
     <a className="skip-link" href="#main" onClick={event => {
       event.preventDefault();
@@ -169,8 +158,9 @@ export default function App() {
       main?.scrollIntoView();
     }}>Skip to content</a>
     <Header />
-    {project ? <CaseStudyPage key={project.slug} project={project} /> : <HomePage />}
-    <footer className="site-footer shell"><span>Runchu Wu · HCI & Responsible AI</span><a href="#top" onClick={event => {
+    {researchProject ? <ResearchPage key={researchProject.slug} slug={researchProject.slug} activeSection={activeSection} onOpen={setResearchImage} /> : project ? <CaseStudyPage key={project.slug} project={project} /> : <HomePage />}
+    <ImageViewer item={researchImage} onClose={() => setResearchImage(null)} />
+    <footer className="site-footer shell"><a href="#top" onClick={event => {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: "instant" });
     }}>Back to top ↑</a></footer>
