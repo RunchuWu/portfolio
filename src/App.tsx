@@ -19,7 +19,7 @@ function ContactLinks() {
 
 function Header() {
   return <header className="site-header shell">
-    <nav aria-label="Primary navigation"><a href={homeHref("research")}>Research</a><a href={homeHref("work")}>Other work</a><a href={homeHref("contact")}>Contact</a></nav>
+    <nav aria-label="Primary navigation"><a href={homeHref("research")}>Research</a><a href={homeHref("work")}>Projects</a><a href={homeHref("contact")}>Contact</a></nav>
   </header>;
 }
 
@@ -61,7 +61,7 @@ function HomePage() {
       </article>
     </section>
     <section id="work" className="other-work" aria-labelledby="work-title">
-      <div className="section-heading"><h2 id="work-title">Other selected work</h2></div>
+      <div className="section-heading"><h2 id="work-title">Projects</h2></div>
       <div className="work-grid">{(["dkumoves", "liberata", "sovi"] as const).map(slug => {
         const project = caseStudies.find(item => item.slug === slug)!;
         return <article className="work-card" key={slug}>
