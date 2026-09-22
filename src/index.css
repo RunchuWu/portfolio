@@ -257,6 +257,12 @@
 .project-interface-copy { max-width: 340px; }
 .project-interface-copy h3 { font-size: 18px; margin-bottom: 10px; }
 .project-interface-copy p { font-size: 16px; color: var(--muted); }
+@media(min-width:701px) {
+  .project-image:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
+  .project-image-desktop:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); }
+  .project-image:nth-child(even) .project-interface-visual { grid-column: 2; grid-row: 1; }
+  .project-image:nth-child(even) .project-interface-copy { grid-column: 1; grid-row: 1; }
+}
 .project-outcome { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); }
 .project-outcome h2 { margin-bottom: 14px; }
 .project-outcome p { max-width: 720px; font-size: 16px; color: var(--muted); }
