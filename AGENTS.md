@@ -7,14 +7,14 @@ Keep this portfolio restrained, readable and simple. Apply these preferences con
 - Show the author's name once in the homepage introduction. Do not repeat it in the header or footer, or add a small field-of-study label above it.
 - Keep contact links as accessible icons below the introduction, with descriptive accessible names and hover labels. Do not duplicate a Contact section at the bottom.
 - On selected product-project pages, put the project title first, followed directly by role, Tools and a single product link. Use readable text around 16–17 px, not tiny metadata labels.
-- A short Project Overview may use Problem, Decision and Outcome as inline labels. Use normal document flow rather than cards, grids, boxes or separate metadata panels.
-- Below that, show the original project images without captions, promotional headings, inspection buttons or click-to-enlarge interactions. Preserve aspect ratios and descriptive alt text. Do not stack or overlap screenshots decoratively.
+- Keep project detail pages organized into a few substantial sections: Project Overview, Selected Interfaces, and Outcome (or Current Activity when appropriate). Concise means clear hierarchy and restrained prose, not stripping out the story or all explanation.
+- Use a short overview explaining the project and the author's contribution. Show original interface images with a short descriptive heading and one or two useful sentences beside each image on desktop, stacked below it on mobile. No tiny numbered labels, separate cards, inspection buttons or click-to-enlarge interactions. Preserve aspect ratios and descriptive alt text; do not overlap screenshots.
 - Do not add Scope & Evidence panels, process/loop sections, large metric cards, or decorative statistics to selected product-project pages.
-- DKU Moves ends with a plain “3K users” line and the DKU Athletics website link. Do not add other closing calls to action.
-- Liberata is simpler: show its title, Project Overview and Selected Interfaces only. Omit role, Tools, introductory metadata, the session-architecture sketch, metrics and closing links.
+- Write outcomes as complete, grounded sentences rather than standalone numbers or metric tiles. DKU Moves should explain that it serves around 3,000 students, staff and faculty, with the DKU Athletics website link below.
+- Liberata keeps a minimal title header without role, Tools or extra introductory metadata, then follows the same overview, captioned interfaces and outcome structure. Omit the session-architecture sketch and metric tiles.
 - Avoid page-end Get in touch, All research & projects, Next project and Back to top links. The primary navigation is sufficient.
 - Research detail pages retain the requested RQ, Methodology, My Contribution, Dataset and Main Result structure. Necessary scientific captions and interpretation limits belong with their evidence; do not strip them simply to match product-project pages.
-- Favor removing redundant text and controls over inventing new headings or components. Do not reintroduce removed elements during later redesigns.
+- Remove redundant text and controls, but preserve the few section headings and adjacent explanations that make each project's progression understandable. Do not interpret requests for simplicity as requests for an image-only page.
 
 ## Validation
 

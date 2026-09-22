@@ -37,6 +37,7 @@ export interface CaseStudy {
   tools: string;
   heroLine: string;
   overview: string;
+  outcome: string;
   externalUrl?: string;
   media: MediaItem[];
   summaryFacts: SummaryFact[];
@@ -58,7 +59,8 @@ export const profile = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "dkumoves",
-    overview: "DKU Moves helps students, staff and faculty record activities, follow their progress and take part in campus challenges. As product owner and design and front-end lead, I worked on activity logging, sharing, rankings and rewards. The platform serves around 3,000 people across the university.",
+    overview: "DKU Moves helps students, staff and faculty record activities, follow their progress and take part in campus challenges. As product owner and design and front-end lead, I worked on activity logging, sharing, rankings and rewards.",
+    outcome: "DKU Moves now serves around 3,000 students, staff and faculty across the university, bringing activity logging, campus rankings and rewards together in one place.",
     title: "DKU Moves",
     type: "Product strategy · UX/UI · Full-stack",
     period: "2026 — present",
@@ -74,8 +76,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/home-anonymized.png",
         alt: "DKU Moves home dashboard with daily distance, streak, points, and campus rank",
         eyebrow: "01 · Home",
-        title: "Start with today",
-        caption: "Progress, streak, points, and rank create one clear starting point.",
+        title: "Daily progress",
+        caption: "Today's activity, streak, points and campus rank sit together on the home screen, giving people a quick view of their progress.",
         kind: "phone",
       },
       {
@@ -83,8 +85,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/log-activity.png",
         alt: "DKU Moves activity logging workflow with sport selection",
         eyebrow: "02 · Log",
-        title: "Reduce logging effort",
-        caption: "A staged selector makes a broad activity catalog feel fast.",
+        title: "Recording an activity",
+        caption: "The logging flow starts with choosing a sport, then guides people through recording their activity.",
         kind: "phone",
       },
       {
@@ -92,8 +94,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/share-anonymized.png",
         alt: "DKU Moves generated activity sharing card",
         eyebrow: "03 · Share",
-        title: "Make effort visible",
-        caption: "A generated card turns a check-in into a campus moment.",
+        title: "Sharing a check-in",
+        caption: "A completed activity becomes a shareable card, so people can bring their progress into conversations with others.",
         kind: "phone",
       },
       {
@@ -101,8 +103,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/market-anonymized.png",
         alt: "DKU Moves rewards marketplace showing point balance and inventory",
         eyebrow: "04 · Market",
-        title: "Close the reward loop",
-        caption: "Balance, inventory, and redemption states make points tangible.",
+        title: "Using activity points",
+        caption: "The marketplace brings the point balance and available rewards together, making it clear what people can redeem.",
         kind: "phone",
       },
       {
@@ -110,8 +112,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/campus-ranking.png",
         alt: "DKU Moves campus activity pulse and group rankings",
         eyebrow: "05 · Campus",
-        title: "See collective momentum",
-        caption: "Rankings connect individual movement to the wider community.",
+        title: "Campus activity",
+        caption: "Campus rankings place individual activity alongside the wider community, with a view of how different groups are participating.",
         kind: "phone",
       },
       {
@@ -119,8 +121,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/dkumoves/profile-anonymized.png",
         alt: "DKU Moves profile with personal progress and activity history",
         eyebrow: "06 · Profile",
-        title: "Own the progress",
-        caption: "History and achievements build a durable activity identity.",
+        title: "Activity history",
+        caption: "The profile brings past check-ins and personal progress together, so people can look back beyond today's activity.",
         kind: "phone",
       },
     ],
@@ -147,7 +149,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "sovi",
-    overview: "Sovi.AI helps students work through questions and study materials. During my product management internship at Dreame Technology, I took the Smart PDF Parsing feature from its initial brief to launch, shaping the flow from uploading a document to asking grounded follow-up questions.",
+    overview: "Sovi.AI helps students work through questions and study materials. During my product management internship at Dreame Technology, I shaped the Smart PDF Parsing workflow, from uploading a document to asking follow-up questions grounded in its content.",
+    outcome: "Smart PDF Parsing shipped as part of Sovi.AI’s commercial product. My work took the feature from its initial brief through workflow design and launch.",
     title: "Sovi.AI",
     type: "AI product strategy · Interaction design",
     period: "Dreame Technology · 2025",
@@ -163,8 +166,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/sovi/scan.png",
         alt: "Official Sovi.AI product visual showing question capture and scan processing",
         eyebrow: "01 · Capture",
-        title: "Meet the material",
-        caption: "Start from the student’s own question or learning material.",
+        title: "Capturing a question",
+        caption: "This view from Sovi.AI's public product shows how a photographed question enters the study workflow.",
         kind: "phone",
       },
       {
@@ -172,8 +175,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/sovi/solve.png",
         alt: "Official Sovi.AI product visual showing a structured step-by-step explanation",
         eyebrow: "02 · Explain",
-        title: "Structure the answer",
-        caption: "Step-by-step output makes the reasoning scannable and actionable.",
+        title: "Working through an explanation",
+        caption: "Sovi.AI presents answers as a sequence of steps. These public product screens provide context for my work on the document-learning workflow.",
         kind: "phone",
       },
       {
@@ -208,6 +211,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "liberata",
     overview: "Liberata connects literature discovery with research participation. As a full-stack engineer, I worked on browsing, search and researcher identity, allowing visitors to explore papers before signing in with ORCID to save or contribute.",
+    outcome: "Visitors can explore literature before creating an account, then connect their ORCID identity when they are ready to save or contribute. The browsing and sign-in work supports this gradual path into research participation.",
     title: "Liberata",
     type: "Discovery UX · Product engineering · Identity",
     period: "2025",
@@ -223,8 +227,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/liberata/literature-browse.png",
         alt: "Liberata literature browsing interface with fielded search and paper results",
         eyebrow: "01 · Discover",
-        title: "Browse before commitment",
-        caption: "Real literature gives first-time visitors a reason to continue.",
+        title: "Browsing literature",
+        caption: "Visitors can search and explore papers before signing in. Researcher identity is introduced when they want to save or contribute.",
         kind: "desktop",
       },
       {
@@ -232,8 +236,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/liberata/peer-review.png",
         alt: "Liberata peer review product interface",
         eyebrow: "02 · Participate",
-        title: "Reveal deeper actions",
-        caption: "Identity appears when a durable researcher action needs it.",
+        title: "Peer review",
+        caption: "The peer-review area gives researchers a place to explore review activity within the same navigation as literature discovery.",
         kind: "desktop",
       },
       {
@@ -241,8 +245,8 @@ export const caseStudies: CaseStudy[] = [
         fullSrc: "/work/liberata/replication.png",
         alt: "Liberata replication workflow interface",
         eyebrow: "03 · Contribute",
-        title: "Keep one product language",
-        caption: "Discovery and contribution share a coherent navigation system.",
+        title: "Replication",
+        caption: "The replication area carries the browsing layout into research participation, with separate views for the marketplace, papers and assignments.",
         kind: "desktop",
       },
     ],

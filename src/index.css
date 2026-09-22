@@ -245,19 +245,26 @@
 .project-role { margin-top: 18px; font-size: 17px; }
 .project-tools { margin-top: 7px; font-size: 16px; color: var(--muted); }
 .selected-project .case-intro>.project-website { margin-top: 12px; font-size: 16px; }
-.project-summary { font-size: 16px; line-height: 1.7; }
-.project-summary>div+div { margin-top: 16px; }
-.project-summary dt { display: inline; font-weight: 500; }
-.project-summary dt::after { content: ": "; }
-.project-summary dd { display: inline; color: var(--muted); }
-.project-images { display: flex; flex-direction: column; gap: 56px; padding-top: 12px; }
-.project-images-title { font-size: 22px; margin-bottom: -32px; }
-.project-image img { margin-inline: auto; height: auto; }
-.project-image-phone img { max-height: 520px; width: auto; }
+.project-images { padding-top: 28px; border-top: 1px solid var(--line); }
+.project-images h2, .project-outcome h2 { font-size: 22px; margin-bottom: 28px; }
+.project-interface-list { display: flex; flex-direction: column; gap: 64px; }
+.project-image { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 48px; }
+.project-image-desktop { grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 32px; }
+.project-interface-visual { min-width: 0; }
+.project-interface-visual img { margin-inline: auto; height: auto; }
+.project-image-phone img { max-height: 500px; width: auto; }
 .project-image-desktop img { width: 100%; }
-.project-closing { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: baseline; padding-top: 40px; font-size: 16px; }
-@media(max-width:560px) {
-  .project-images { gap: 36px; }
-  .project-images-title { margin-bottom: -12px; }
-  .project-image-phone img { max-height: 480px; max-width: 100%; }
+.project-interface-copy { max-width: 340px; }
+.project-interface-copy h3 { font-size: 18px; margin-bottom: 10px; }
+.project-interface-copy p { font-size: 16px; color: var(--muted); }
+.project-outcome { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); }
+.project-outcome h2 { margin-bottom: 14px; }
+.project-outcome p { max-width: 720px; font-size: 16px; color: var(--muted); }
+.project-outcome>a { display: inline-block; margin-top: 16px; font-size: 16px; }
+@media(max-width:700px) {
+  .project-image, .project-image-desktop { grid-template-columns: 1fr; gap: 24px; }
+  .project-interface-list { gap: 48px; }
+  .project-interface-copy { max-width: 100%; }
+  .project-image-phone img { max-height: 460px; max-width: 100%; }
+  .project-outcome { margin-top: 48px; }
 }

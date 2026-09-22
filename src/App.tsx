@@ -78,11 +78,14 @@ function HomePage() {
 }
 
 function ProjectImages({ project }: { project: CaseStudy }) {
-  return <section className="project-images" aria-label={`${project.title} images`}>
-    {project.slug === "liberata" && <h2 className="project-images-title">Selected Interfaces</h2>}
+  return <section className="project-images" aria-labelledby="interfaces-title">
+    <h2 id="interfaces-title">Selected Interfaces</h2>
+    <div className="project-interface-list">
     {project.media.filter(item => item.src).map(item => <figure className={`project-image project-image-${item.kind}`} key={item.src}>
-      <img src={asset(item.src!)} alt={item.alt} loading="lazy" />
+      <div className="project-interface-visual"><img src={asset(item.src!)} alt={item.alt} loading="lazy" /></div>
+      <figcaption className="project-interface-copy"><h3>{item.title}</h3><p>{item.caption}</p></figcaption>
     </figure>)}
+    </div>
   </section>;
 }
 
@@ -110,10 +113,14 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
     </header>
     <section className="project-overview" aria-labelledby="overview-title">
       <h2 id="overview-title">Project Overview</h2>
-      <dl className="project-summary">{project.summaryFacts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.text}</dd></div>)}</dl>
+      <p>{project.overview}</p>
     </section>
     <ProjectImages project={project} />
-    {project.slug === "dkumoves" && <div className="project-closing"><p>3K users</p><a href="https://athletics.dukekunshan.edu.cn/" target="_blank" rel="noopener noreferrer">DKU Athletics website <ArrowUpRight aria-hidden="true" /></a></div>}
+    <section className="project-outcome" aria-labelledby="outcome-title">
+      <h2 id="outcome-title">Outcome</h2>
+      <p>{project.outcome}</p>
+      {project.slug === "dkumoves" && <a href="https://athletics.dukekunshan.edu.cn/" target="_blank" rel="noopener noreferrer">DKU Athletics website <ArrowUpRight aria-hidden="true" /></a>}
+    </section>
 
   </main>;
 }
