@@ -79,6 +79,7 @@ function HomePage() {
 
 function ProjectImages({ project }: { project: CaseStudy }) {
   return <section className="project-images" aria-label={`${project.title} images`}>
+    {project.slug === "liberata" && <h2 className="project-images-title">Selected Interfaces</h2>}
     {project.media.filter(item => item.src).map(item => <figure className={`project-image project-image-${item.kind}`} key={item.src}>
       <img src={asset(item.src!)} alt={item.alt} loading="lazy" />
     </figure>)}
@@ -103,9 +104,9 @@ function CaseStudyPage({ project }: { project: CaseStudy }) {
   return <main id="main" className="case-page selected-project shell" tabIndex={-1}>
     <header className="case-intro">
       <h1>{project.title}</h1>
-      <p className="project-role">{project.role}</p>
+      {project.slug !== "liberata" && <><p className="project-role">{project.role}</p>
       <p className="project-tools">Tools: {project.tools}</p>
-      {project.externalUrl && <a className="project-website" href={project.externalUrl} target="_blank" rel="noopener noreferrer">{project.title} website <ArrowUpRight aria-hidden="true" /></a>}
+      {project.externalUrl && <a className="project-website" href={project.externalUrl} target="_blank" rel="noopener noreferrer">{project.title} website <ArrowUpRight aria-hidden="true" /></a>}</>}
     </header>
     <section className="project-overview" aria-labelledby="overview-title">
       <h2 id="overview-title">Project Overview</h2>

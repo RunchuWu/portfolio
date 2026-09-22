@@ -10,6 +10,7 @@ Keep this portfolio restrained, readable and simple. Apply these preferences con
 - Below that, show the original project images without captions, promotional headings, inspection buttons or click-to-enlarge interactions. Preserve aspect ratios and descriptive alt text. Do not stack or overlap screenshots decoratively.
 - Do not add Scope & Evidence panels, process/loop sections, large metric cards, or decorative statistics to selected product-project pages.
 - DKU Moves ends with a plain “3K users” line and the DKU Athletics website link. Do not add other closing calls to action.
+- Liberata is simpler: show its title, Project Overview and Selected Interfaces only. Omit role, Tools, introductory metadata, the session-architecture sketch, metrics and closing links.
 - Avoid page-end Get in touch, All research & projects, Next project and Back to top links. The primary navigation is sufficient.
 - Research detail pages retain the requested RQ, Methodology, My Contribution, Dataset and Main Result structure. Necessary scientific captions and interpretation limits belong with their evidence; do not strip them simply to match product-project pages.
 - Favor removing redundant text and controls over inventing new headings or components. Do not reintroduce removed elements during later redesigns.
