@@ -77,21 +77,10 @@ function HomePage() {
   </main>;
 }
 
-function SoviStudyFlow() {
-  return <div className="study-flow"><p>PDF · Text · Word · Presentations</p><span aria-hidden="true">↓</span><strong>Document-based study folder</strong><span aria-hidden="true">↓</span><p>Summaries · Knowledge maps · Document chat · Quizzes</p><small>Based on Sovi.AI’s public AI Study feature.</small></div>;
-}
-
-function ProjectStory({ project }: { project: CaseStudy }) {
-  return <section className={`project-story story-${project.slug}`} aria-label={`${project.title} images`}>
-
-    {project.media.map(item => <figure className="story-chapter" key={item.src ?? item.render}>
-      <div className={`story-stage${item.render ? " story-stage-diagram" : ""}`}>
-        {item.render ? <SoviStudyFlow /> : <div className="story-image"><img src={asset(item.src!)} alt={item.alt} loading="lazy" /></div>}
-      </div>
-      <figcaption className="story-caption">
-        <h3>{item.title}</h3>
-        <p>{item.caption}</p>
-      </figcaption>
+function ProjectImages({ project }: { project: CaseStudy }) {
+  return <section className="project-images" aria-label={`${project.title} images`}>
+    {project.media.filter(item => item.src).map(item => <figure className={`project-image project-image-${item.kind}`} key={item.src}>
+      <img src={asset(item.src!)} alt={item.alt} loading="lazy" />
     </figure>)}
   </section>;
 }
@@ -112,9 +101,19 @@ function ImageViewer({ item, onClose }: { item: MediaItem | null; onClose: () =>
 
 function CaseStudyPage({ project }: { project: CaseStudy }) {
   return <main id="main" className="case-page selected-project shell" tabIndex={-1}>
-    <header className="case-intro"><h1>{project.title}</h1></header>
-    <section className="project-overview" aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2><p>{project.overview}</p></section>
-    <ProjectStory project={project} />
+    <header className="case-intro">
+      <h1>{project.title}</h1>
+      <p className="project-role">{project.role}</p>
+      <p className="project-tools">Tools: {project.tools}</p>
+      {project.externalUrl && <a className="project-website" href={project.externalUrl} target="_blank" rel="noopener noreferrer">{project.title} website <ArrowUpRight aria-hidden="true" /></a>}
+    </header>
+    <section className="project-overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">Project Overview</h2>
+      <dl className="project-summary">{project.summaryFacts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.text}</dd></div>)}</dl>
+    </section>
+    <ProjectImages project={project} />
+    {project.slug === "dkumoves" && <div className="project-closing"><p>3K users</p><a href="https://athletics.dukekunshan.edu.cn/" target="_blank" rel="noopener noreferrer">DKU Athletics website <ArrowUpRight aria-hidden="true" /></a></div>}
+
   </main>;
 }
 

@@ -63,7 +63,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Product strategy · UX/UI · Full-stack",
     period: "2026 — present",
     homeLine: "A campus activity product that turns movement into visible community momentum.",
-    role: "Product Owner · Design & Front-End Lead",
+    role: "Product Owner · Design · Frontend Lead",
     focus: "Behavior change · Community",
     tools: "React · FastAPI · MySQL",
     heroLine: "Turning a points utility into a participation loop for the entire campus.",

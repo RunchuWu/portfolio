@@ -239,3 +239,23 @@
 .story-liberata .story-image img { width: 100%; max-height: none; border-radius: 0; box-shadow: none; }
 .story-liberata .story-caption { max-width: 720px; }
 .research-page { padding-bottom: 48px; }
+
+/* Selected project pages: readable text and unframed images. */
+.selected-project .case-intro { padding-bottom: 36px; }
+.project-role { margin-top: 18px; font-size: 17px; }
+.project-tools { margin-top: 7px; font-size: 16px; color: var(--muted); }
+.selected-project .case-intro>.project-website { margin-top: 12px; font-size: 16px; }
+.project-summary { font-size: 16px; line-height: 1.7; }
+.project-summary>div+div { margin-top: 16px; }
+.project-summary dt { display: inline; font-weight: 500; }
+.project-summary dt::after { content: ": "; }
+.project-summary dd { display: inline; color: var(--muted); }
+.project-images { display: flex; flex-direction: column; gap: 56px; padding-top: 12px; }
+.project-image img { margin-inline: auto; height: auto; }
+.project-image-phone img { max-height: 520px; width: auto; }
+.project-image-desktop img { width: 100%; }
+.project-closing { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: baseline; padding-top: 40px; font-size: 16px; }
+@media(max-width:560px) {
+  .project-images { gap: 36px; }
+  .project-image-phone img { max-height: 480px; max-width: 100%; }
+}
